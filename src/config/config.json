@@ -1,0 +1,1290 @@
+{
+    "LOCAL": {
+        "whitelist_domain": [
+            "http://localhost:3000",
+            "http://10.89.20.132:2006",
+            "http://10.89.20.136:443",
+            "http://10.89.20.136:3001",
+            "http://10.89.20.136:3003"
+        ],
+        "encryption" : true,
+        "encryption_key" : "01234567890qwertyuiopasdfghjklzxcvbnm",
+        "port" : 4000,
+        "debug" : true,
+        "http" :
+        {
+            "timeout" : 15000
+        },
+        "token" : {
+            "key" : "@cnJak@rta"
+        },
+        "db" : {
+            "dialect"  : "postgres",
+            "host"     : "localhost",
+            "schema"   : "public",
+            "username" : "postgres",
+            "password" : "admin",
+            "name"     : "digi",
+            "port"     : 5432,
+            "timezone" : "+07:00",
+            "pool"     : {
+                "min"  : 0,
+                "max"  : 1000,
+                "idle" : 10000
+            },
+            "dialectOptions" : {
+                "ssl" : false
+            }
+        },
+        "dbOracle": {
+                "user":"EBILLACDC",
+                "password":"EBILLACDC",
+                "connectString":"10.100.114.32:1521/ebdev",
+                "maxFetchRows": 1000
+        },
+        "redis" : {
+            "redisConfig": {
+                "host" : "localhost",
+                "port" : "6379"
+            },
+            "attributes" : ["CH","LOA","CSV"]
+        },
+        "Ebill" : {
+            "downloadSingle" : "http://10.100.114.31/reporting/pdfbill.jsp",
+            "storage" : "\\\\MW721AHG8SBQKQ\\Users\\barnabas.r.melsasail\\Downloads\\testDigi\\",
+            "reportingSQLFile" : {
+                "usagedetails" : "/sqlfiles/usagedetails.sql",
+                "accountsummary" : "/sqlfiles/accountsummary.sql",
+                "totalbill" : "/sqlfiles/totalbill.sql",
+                "topusagenumber" : "/sqlfiles/topusagenumber.sql",
+                "domesticusage" : "/sqlfiles/domesticusage.sql",
+                "internationalroamingusage" : "/sqlfiles/internationalroamingusage.sql",
+                "internationalroamingcall" : "/sqlfiles/internationalroamingcall.sql",
+                "commitmentsharingrebate" : "/sqlfiles/commitmentsharingrebate.sql",
+                "billspayments" : "/sqlfiles/billspayments.sql",
+                "topspenders" : "/sqlfiles/topspenders.sql",
+                "internationalusage" : "/sqlfiles/internationalusage.sql",
+                "detailtotalcalls" : "/sqlfiles/detailtotalcalls.sql",
+                "detailtotalusage" : "/sqlfiles/detailtotalusage.sql"
+            }
+        },
+        "telenorConfig" : {
+            "clientId": "accenture-enterpriseadminportal-web",
+            "clientSecret" : "hH4r7qaYN9YC5N5NDoguR8njBW2dMzUbUxsKwHcNVbg=",
+            "baseURL" : "https://connect.staging.telenordigital.com",
+            "authorization" : "/oauth/authorize",
+            "token" : "/oauth/token",
+            "tokenInfo" : "/oauth/tokeninfo",
+            "userInfo" : "/oauth/userinfo",
+            "revokeToken" : "/oauth/revoke",
+            "userLogout" : "/oauth/logout",
+            "redirectUri" : "http://digi-ent-portal.s3-website-ap-southeast-1.amazonaws.com/sso/telenor/callback",
+            "logoutRedirectUri" : "http://new.digi.com.my/home",
+            "responseType" : "code",
+            "scope" : "openid+profile+email+phone+id.user.email.read+id.user.phone.read+accenture.enterpriseadminportal",
+            "authMethod" : "connect_ui",
+            "acrVal" : "2"
+        },
+        "CSGConfig":{
+            "CSGUrl" : "http://10.100.114.118:16100",
+            "username" : "EWP",
+            "password" : "weblogic",
+            "header" : { 
+                "CSGHeader" : {
+                    "ReferenceId": "",
+                    "ChannelId": "EWP",
+                    "ChannelMedia": "WEB",
+                    "attributes": {
+                        "xmlns": "http://digi.com.my/"
+                    }
+                }
+            },
+            "runningNumber":"000839",
+            "listAPI" : {
+                "RetrieveCustomer" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CustomerManagement/RetrieveCustomer/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveCustomer_v1.0.wsdl",
+                    "method": "RetrieveCustomerService.RetrieveCustomer.RetrieveCustomer",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveAccount" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/AccountManagement/RetrieveAccount/v1.1",
+                    "file": "/wsdl/WSDL_RetrieveAccount_v1.1.wsdl",
+                    "method": "RetrieveAccount.RetrieveAccount.RetrieveAccount",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveSubscriber" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CustomerManagement/RetrieveSubscriber/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveSubscriber_v1.0.wsdl",
+                    "method": "RetrieveSubscriber.RetrieveSubscriber.RetrieveSubscriber",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveCorporateGroupMembers" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CorporateManagement/RetrieveCorporateGroupMembers/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveCorporateGroupMembers_v1.0.wsdl",
+                    "method": "RetrieveCorporateGroupMembersService.RetrieveCorporateGroupMembers.RetrieveCorporateGroupMembers",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveCorporateGroups" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CorporateManagement/RetrieveCorporateGroups/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveCorporateGroup_v1.0.wsdl",
+                    "method": "RetrieveCorporateGroupsService.RetrieveCorporateGroups.RetrieveCorporateGroups",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveInvoice" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/BillingAndInvoices/RetrieveInvoice/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveInvoice_v1.0.wsdl",
+                    "method": "RetrieveInvoiceService.RetrieveInvoice.RetrieveInvoice",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveBillingInfo" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/BillingAndInvoices/RetrieveBillingInfo/v1.1",
+                    "file": "/wsdl/WSDL_RetrieveBillingInfo_v1.1.wsdl",
+                    "method": "RetrieveBillingInfoService.RetrieveBillingInfo.RetrieveBillingInfo",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveInvoicePayment" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/BillingAndInvoices/RetrieveInvoicePayment/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveInvoicePayment_v1.0.wsdl",
+                    "method": "RetrieveInvoicePaymentService.RetrieveInvoicePayment.RetrieveInvoicePayment",
+                    "apiurl": "http://10.100.114.118:16100"
+                },                
+                "SendEmail" : {
+                    "uri": "/EnterpriseServices/BusinessServices/ServiceControlAndExecution/Communication/SendEmail/v1.1",
+                    "file": "/wsdl/WSDL_SendEmail_v1.1.wsdl",
+                    "method": "SendEmail.SendEmail.SendEmail",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "MakePayment" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/RevenueAndPaymentCollection/MakePayment/v1.0",
+                    "file": "/wsdl/WSDL_MakePayment_v1.0.wsdl",
+                    "method": "MakePaymentService.MakePayment.MakePayment",
+                    "apiurl": "http://10.100.114.118:16100"
+                }
+            },
+            "maxbillperiodrec" : 5
+        },
+        "EJSConfig" : {
+            "EmailTemplate" : {
+                "taxinvoice" : "/email_template/taxinvoice.html",
+                "usercreated"  : "/email_template/usercreated.html",
+                "userupdated" : "/email_template/userupdated.html",
+                "userdeleted" : "/email_template/userdeleted.html"
+            },
+            "ImageIP": "http://10.89.20.132:2006//img/"
+        },
+        "ControllerConfig" : {
+            "overview" : {
+                "maxgroupduedaterec" : 10
+            }
+        },
+        "iPay88" :{
+            "merchantCode" : "M06252_S0012",
+            "merchantKey" : "sCK2RbZQ6I",
+            "redirectURL" : "10.89.20.132:2006/sso/telenor/makepayment",
+            "userChannel" : "133"
+        }
+    },
+    "DEVSERVER": {
+        "whitelist_domain": [
+            "http://localhost:3000",
+            "http://10.89.20.132:2006",
+            "http://10.89.20.136:443",
+            "http://10.89.20.136:3001",
+            "http://10.89.20.136:3003"
+        ],
+        "encryption" : true,
+        "encryption_key" : "01234567890qwertyuiopasdfghjklzxcvbnm",
+        "port" : 2013,
+        "debug" : true,
+        "http" : {
+            "timeout" : 15000
+        },
+        "token" : {
+            "key" : "@cnJak@rta"
+        },
+        "db" : {
+            "dialect"  : "postgres",
+            "host"     : "10.89.20.132",
+            "schema"   : "public",
+            "username" : "postgres",
+            "password" : "password123",
+            "name"     : "ewpdev_db",
+            "port"     : 2007,
+            "timezone" : "+07:00",
+            "pool"     : {
+                "min"  : 0,
+                "max"  : 5,
+                "idle" : 10000
+            },
+            "dialectOptions" : {
+                "ssl" : false
+            }
+        },
+        "dbOracle": {
+                "user":"EBILLACDC",
+                "password":"EBILLACDC",
+                "connectString":"10.100.114.32:1521/ebdev",
+                "maxFetchRows": 10000
+        },
+        "redis" : {
+            "redisConfig": {
+                "host" : "127.0.0.2",
+                "port" : "2014"
+            },
+            "attributes" : ["CH","LOA","CSV"]
+        },
+        "Ebill" : {
+            "downloadSingle" : "http://10.100.114.31/reporting/pdfbill.jsp",
+            "storage" : "/app/EWPDEV/REPORT/report_temp/",
+            "reportingSQLFile" : {
+                "usagedetails" : "/sqlfiles/usagedetails.sql",
+                "accountsummary" : "/sqlfiles/accountsummary.sql",
+                "totalbill" : "/sqlfiles/totalbill.sql",
+                "topusagenumber" : "/sqlfiles/topusagenumber.sql",
+                "domesticusage" : "/sqlfiles/domesticusage.sql",
+                "internationalroamingusage" : "/sqlfiles/internationalroamingusage.sql",
+                "internationalroamingcall" : "/sqlfiles/internationalroamingcall.sql",
+                "commitmentsharingrebate" : "/sqlfiles/commitmentsharingrebate.sql",
+                "billspayments" : "/sqlfiles/billspayments.sql",
+                "topspenders" : "/sqlfiles/topspenders.sql",
+                "internationalusage" : "/sqlfiles/internationalusage.sql",
+                "detailtotalcalls" : "/sqlfiles/detailtotalcalls.sql",
+                "detailtotalusage" : "/sqlfiles/detailtotalusage.sql"
+            }
+        },
+        "telenorConfig" : {
+            "clientId": "accenture-enterpriseadminportal-web",
+            "clientSecret" : "hH4r7qaYN9YC5N5NDoguR8njBW2dMzUbUxsKwHcNVbg=",
+            "baseURL" : "https://connect.staging.telenordigital.com",
+            "authorization" : "/oauth/authorize",
+            "token" : "/oauth/token",
+            "tokenInfo" : "/oauth/tokeninfo",
+            "userInfo" : "/oauth/userinfo",
+            "revokeToken" : "/oauth/revoke",
+            "userLogout" : "/oauth/logout",
+            "redirectUri" : "http://10.89.20.132:2006/sso/telenor/callback",
+            "logoutRedirectUri" : "http://new.digi.com.my/home",
+            "responseType" : "code",
+            "scope" : "openid+profile+email+phone+id.user.email.read+id.user.phone.read+accenture.enterpriseadminportal",
+            "authMethod" : "connect_ui",
+            "acrVal" : "2"
+        },
+        "CSGConfig":{
+            "CSGUrl" : "http://10.100.114.118:16100",
+            "username" : "EWP",
+            "password" : "weblogic",
+            "header" : { 
+                "CSGHeader" : {
+                    "ReferenceId": "",
+                    "ChannelId": "EWP",
+                    "ChannelMedia": "WEB",
+                    "attributes": {
+                        "xmlns": "http://digi.com.my/"
+                    }
+                }
+            },
+            "runningNumber":"000839",
+            "listAPI" : {
+                "RetrieveCustomer" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CustomerManagement/RetrieveCustomer/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveCustomer_v1.0.wsdl",
+                    "method": "RetrieveCustomerService.RetrieveCustomer.RetrieveCustomer",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveAccount" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/AccountManagement/RetrieveAccount/v1.1",
+                    "file": "/wsdl/WSDL_RetrieveAccount_v1.1.wsdl",
+                    "method": "RetrieveAccount.RetrieveAccount.RetrieveAccount",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveSubscriber" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CustomerManagement/RetrieveSubscriber/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveSubscriber_v1.0.wsdl",
+                    "method": "RetrieveSubscriber.RetrieveSubscriber.RetrieveSubscriber",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveCorporateGroupMembers" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CorporateManagement/RetrieveCorporateGroupMembers/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveCorporateGroupMembers_v1.0.wsdl",
+                    "method": "RetrieveCorporateGroupMembersService.RetrieveCorporateGroupMembers.RetrieveCorporateGroupMembers",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveCorporateGroups" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CorporateManagement/RetrieveCorporateGroups/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveCorporateGroup_v1.0.wsdl",
+                    "method": "RetrieveCorporateGroupsService.RetrieveCorporateGroups.RetrieveCorporateGroups",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveInvoice" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/BillingAndInvoices/RetrieveInvoice/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveInvoice_v1.0.wsdl",
+                    "method": "RetrieveInvoiceService.RetrieveInvoice.RetrieveInvoice",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveBillingInfo" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/BillingAndInvoices/RetrieveBillingInfo/v1.1",
+                    "file": "/wsdl/WSDL_RetrieveBillingInfo_v1.1.wsdl",
+                    "method": "RetrieveBillingInfoService.RetrieveBillingInfo.RetrieveBillingInfo",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveInvoicePayment" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/BillingAndInvoices/RetrieveInvoicePayment/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveInvoicePayment_v1.0.wsdl",
+                    "method": "RetrieveInvoicePaymentService.RetrieveInvoicePayment.RetrieveInvoicePayment",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "SendEmail" : {
+                    "uri": "/EnterpriseServices/BusinessServices/ServiceControlAndExecution/Communication/SendEmail/v1.1",
+                    "file": "/wsdl/WSDL_SendEmail_v1.1.wsdl",
+                    "method": "SendEmail.SendEmail.SendEmail",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "MakePayment" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/RevenueAndPaymentCollection/MakePayment/v1.0",
+                    "file": "/wsdl/WSDL_MakePayment_v1.0.wsdl",
+                    "method": "MakePaymentService.MakePayment.MakePayment",
+                    "apiurl": "http://10.100.114.118:16100"
+                }
+            },
+            "maxbillperiodrec" : 5
+        },
+        "EJSConfig" : {
+            "EmailTemplate" : {
+                "taxinvoice" : "/email_template/taxinvoice.html",
+                "usercreated"  : "/email_template/usercreated.html",
+                "userupdated" : "/email_template/userupdated.html",
+                "userdeleted" : "/email_template/userdeleted.html"
+            },
+            "ImageIP": "http://10.89.20.132:2006//img/"
+        },
+        "ControllerConfig" : {
+            "overview" : {
+                "maxgroupduedaterec" : 10
+            }
+        },
+        "iPay88" :{
+            "merchantCode" : "M06252_S0012",
+            "merchantKey" : "sCK2RbZQ6I",
+            "redirectURL" : "http://10.89.20.132:2006/sso/telenor/makepayment",
+            "userChannel" : "133"
+        }
+    },
+    "UAT": {
+        "whitelist_domain": [
+            "http://localhost:3000",
+            "http://10.89.20.132:2006",
+            "http://10.89.20.136:443",
+            "http://10.89.20.136:3001",
+            "http://10.89.20.136:3003"
+        ],
+        "encryption" : true,
+        "encryption_key" : "01234567890qwertyuiopasdfghjklzxcvbnm",
+        "port" : 3001,
+        "debug" : true,
+        "http" : {
+            "timeout" : 15000
+        },
+        "token" : {
+            "key" : "@cnJak@rta"
+        },
+        "db" : {
+            "dialect"  : "postgres",
+            "host"     : "10.89.20.138",
+            "schema"   : "public",
+            "username" : "postgres",
+            "password" : "pinpass123",
+            "name"     : "ewp_uat_db",
+            "port"     : 3000,
+            "timezone" : "+07:00",
+            "pool"     : {
+                "min"  : 0,
+                "max"  : 5,
+                "idle" : 10000
+            },
+            "dialectOptions" : {
+                "ssl" : false
+            }
+        },
+        "dbOracle": {
+                "user":"EBILLACDC",
+                "password":"EBILLACDC",
+                "connectString":"10.100.114.32:1521/ebdev",
+                "maxFetchRows": 10000
+        },
+        "redis" : {
+            "redisConfig": {
+                "host" : "127.0.0.1",
+                "port" : "6379"
+            },
+            "attributes" : ["CH","LOA","CSV"]
+        },
+        "Ebill" : {
+            "downloadSingle" : "http://10.100.114.31/reporting/pdfbill.jsp",
+            "storage" : "/app/EWPUAT/REPORT/report_temp/",
+            "reportingSQLFile" : {
+                "usagedetails" : "/sqlfiles/usagedetails.sql",
+                "accountsummary" : "/sqlfiles/accountsummary.sql",
+                "totalbill" : "/sqlfiles/totalbill.sql",
+                "topusagenumber" : "/sqlfiles/topusagenumber.sql",
+                "domesticusage" : "/sqlfiles/domesticusage.sql",
+                "internationalroamingusage" : "/sqlfiles/internationalroamingusage.sql",
+                "internationalroamingcall" : "/sqlfiles/internationalroamingcall.sql",
+                "commitmentsharingrebate" : "/sqlfiles/commitmentsharingrebate.sql",
+                "billspayments" : "/sqlfiles/billspayments.sql",
+                "topspenders" : "/sqlfiles/topspenders.sql",
+                "internationalusage" : "/sqlfiles/internationalusage.sql",
+                "detailtotalcalls" : "/sqlfiles/detailtotalcalls.sql",
+                "detailtotalusage" : "/sqlfiles/detailtotalusage.sql"
+            }
+        },
+        "telenorConfig" : {
+            "clientId": "accenture-enterpriseadminportal-web",
+            "clientSecret" : "hH4r7qaYN9YC5N5NDoguR8njBW2dMzUbUxsKwHcNVbg=",
+            "baseURL" : "https://connect.staging.telenordigital.com",
+            "authorization" : "/oauth/authorize",
+            "token" : "/oauth/token",
+            "tokenInfo" : "/oauth/tokeninfo",
+            "userInfo" : "/oauth/userinfo",
+            "revokeToken" : "/oauth/revoke",
+            "userLogout" : "/oauth/logout",
+            "redirectUri" : "http://10.89.20.136:443/sso/telenor/callback",
+            "logoutRedirectUri" : "http://new.digi.com.my/home",
+            "responseType" : "code",
+            "scope" : "openid+profile+email+phone+id.user.email.read+id.user.phone.read+accenture.enterpriseadminportal",
+            "authMethod" : "connect_ui",
+            "acrVal" : "2"
+        },
+        "CSGConfig":{
+            "CSGUrl" : "http://10.100.114.118:16100",
+            "username" : "EWP",
+            "password" : "weblogic",
+            "header" : { 
+                "CSGHeader" : {
+                    "ReferenceId": "",
+                    "ChannelId": "EWP",
+                    "ChannelMedia": "WEB",
+                    "attributes": {
+                        "xmlns": "http://digi.com.my/"
+                    }
+                }
+            },
+            "runningNumber":"000839",
+            "listAPI" : {
+                "RetrieveCustomer" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CustomerManagement/RetrieveCustomer/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveCustomer_v1.0.wsdl",
+                    "method": "RetrieveCustomerService.RetrieveCustomer.RetrieveCustomer",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveAccount" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/AccountManagement/RetrieveAccount/v1.1",
+                    "file": "/wsdl/WSDL_RetrieveAccount_v1.1.wsdl",
+                    "method": "RetrieveAccount.RetrieveAccount.RetrieveAccount",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveSubscriber" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CustomerManagement/RetrieveSubscriber/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveSubscriber_v1.0.wsdl",
+                    "method": "RetrieveSubscriber.RetrieveSubscriber.RetrieveSubscriber",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveCorporateGroupMembers" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CorporateManagement/RetrieveCorporateGroupMembers/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveCorporateGroupMembers_v1.0.wsdl",
+                    "method": "RetrieveCorporateGroupMembersService.RetrieveCorporateGroupMembers.RetrieveCorporateGroupMembers",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveCorporateGroups" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CorporateManagement/RetrieveCorporateGroups/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveCorporateGroup_v1.0.wsdl",
+                    "method": "RetrieveCorporateGroupsService.RetrieveCorporateGroups.RetrieveCorporateGroups",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveInvoice" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/BillingAndInvoices/RetrieveInvoice/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveInvoice_v1.0.wsdl",
+                    "method": "RetrieveInvoiceService.RetrieveInvoice.RetrieveInvoice",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveBillingInfo" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/BillingAndInvoices/RetrieveBillingInfo/v1.1",
+                    "file": "/wsdl/WSDL_RetrieveBillingInfo_v1.1.wsdl",
+                    "method": "RetrieveBillingInfoService.RetrieveBillingInfo.RetrieveBillingInfo",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveInvoicePayment" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/BillingAndInvoices/RetrieveInvoicePayment/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveInvoicePayment_v1.0.wsdl",
+                    "method": "RetrieveInvoicePaymentService.RetrieveInvoicePayment.RetrieveInvoicePayment",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "SendEmail" : {
+                    "uri": "/EnterpriseServices/BusinessServices/ServiceControlAndExecution/Communication/SendEmail/v1.1",
+                    "file": "/wsdl/WSDL_SendEmail_v1.1.wsdl",
+                    "method": "SendEmail.SendEmail.SendEmail",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "MakePayment" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/RevenueAndPaymentCollection/MakePayment/v1.0",
+                    "file": "/wsdl/WSDL_MakePayment_v1.0.wsdl",
+                    "method": "MakePaymentService.MakePayment.MakePayment",
+                    "apiurl": "http://10.100.114.118:16100"
+                }
+            },
+            "maxbillperiodrec" : 5
+        },
+        "EJSConfig" : {
+            "EmailTemplate" : {
+                "taxinvoice" : "/email_template/taxinvoice.html",
+                "usercreated"  : "/email_template/usercreated.html",
+                "userupdated" : "/email_template/userupdated.html",
+                "userdeleted" : "/email_template/userdeleted.html"
+            },
+            "ImageIP": "http://10.89.20.136:443//img/"
+        },
+        "ControllerConfig" : {
+            "overview" : {
+                "maxgroupduedaterec" : 10
+            }
+        },
+        "iPay88" :{
+            "merchantCode" : "M06252_S0012",
+            "merchantKey" : "sCK2RbZQ6I",
+            "redirectURL" : "http://10.89.20.136:443/sso/telenor/makepayment",
+            "userChannel" : "133"
+        }
+    },
+    "STAGING_1": {
+        "whitelist_domain": [
+            "http://localhost:3000",
+            "http://10.89.20.132:2006",
+            "http://10.89.20.136:443",
+            "http://10.89.20.136:3001",
+            "http://10.89.20.136:3003"
+        ],
+        "encryption" : true,
+        "encryption_key" : "01234567890qwertyuiopasdfghjklzxcvbnm",
+        "port" : 3001,
+        "debug" : true,
+        "http" : {
+            "timeout" : 15000
+        },
+        "token" : {
+            "key" : "@cnJak@rta"
+        },
+        "db" : {
+            "dialect"  : "postgres",
+            "host"     : "10.89.20.139",
+            "schema"   : "public",
+            "username" : "postgres",
+            "password" : "pinpass123",
+            "name"     : "ewp_stg_db_01",
+            "port"     : 3000,
+            "timezone" : "+07:00",
+            "pool"     : {
+                "min"  : 0,
+                "max"  : 5,
+                "idle" : 10000
+            },
+            "dialectOptions" : {
+                "ssl" : false
+            }
+        },
+        "dbOracle": {
+                "user":"EBILLACDC",
+                "password":"EBILLACDC",
+                "connectString":"10.100.114.32:1521/ebdev",
+                "maxFetchRows": 10000
+        },
+        "redis" : {
+            "redisConfig": {
+			"sentinels" : [
+                {"host": "10.89.20.139", "port": "16379" },
+                {"host": "10.89.20.140", "port": "16379" }],
+			"name" : "redis-cluster"
+            },
+            "attributes" : ["CH","LOA","CSV"]
+        },
+        "Ebill" : {
+            "downloadSingle" : "http://10.100.114.31/reporting/pdfbill.jsp",
+            "storage" : "/app/EWPSTG_01/REPORT/report_temp/",
+            "reportingSQLFile" : {
+                "usagedetails" : "/sqlfiles/usagedetails.sql",
+                "accountsummary" : "/sqlfiles/accountsummary.sql",
+                "totalbill" : "/sqlfiles/totalbill.sql",
+                "topusagenumber" : "/sqlfiles/topusagenumber.sql",
+                "domesticusage" : "/sqlfiles/domesticusage.sql",
+                "internationalroamingusage" : "/sqlfiles/internationalroamingusage.sql",
+                "internationalroamingcall" : "/sqlfiles/internationalroamingcall.sql",
+                "commitmentsharingrebate" : "/sqlfiles/commitmentsharingrebate.sql",
+                "billspayments" : "/sqlfiles/billspayments.sql",
+                "topspenders" : "/sqlfiles/topspenders.sql",
+                "internationalusage" : "/sqlfiles/internationalusage.sql",
+                "detailtotalcalls" : "/sqlfiles/detailtotalcalls.sql",
+                "detailtotalusage" : "/sqlfiles/detailtotalusage.sql"
+            }
+        },
+        "telenorConfig" : {
+            "clientId": "accenture-enterpriseadminportal-web",
+            "clientSecret" : "hH4r7qaYN9YC5N5NDoguR8njBW2dMzUbUxsKwHcNVbg=",
+            "baseURL" : "https://connect.staging.telenordigital.com",
+            "authorization" : "/oauth/authorize",
+            "token" : "/oauth/token",
+            "tokenInfo" : "/oauth/tokeninfo",
+            "userInfo" : "/oauth/userinfo",
+            "revokeToken" : "/oauth/revoke",
+            "userLogout" : "/oauth/logout",
+            "redirectUri" : "https://mydigibusinessatstg.digi.com.my/sso/telenor/callback",
+            "logoutRedirectUri" : "http://new.digi.com.my/home",
+            "responseType" : "code",
+            "scope" : "openid+profile+email+phone+id.user.email.read+id.user.phone.read+accenture.enterpriseadminportal",
+            "authMethod" : "connect_ui",
+            "acrVal" : "2"
+        },
+        "CSGConfig":{
+            "CSGUrl" : "http://10.100.114.118:16100",
+            "username" : "EWP",
+            "password" : "weblogic",
+            "header" : { 
+                "CSGHeader" : {
+                    "ReferenceId": "",
+                    "ChannelId": "EWP",
+                    "ChannelMedia": "WEB",
+                    "attributes": {
+                        "xmlns": "http://digi.com.my/"
+                    }
+                }
+            },
+            "runningNumber":"000839",
+            "listAPI" : {
+                "RetrieveCustomer" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CustomerManagement/RetrieveCustomer/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveCustomer_v1.0.wsdl",
+                    "method": "RetrieveCustomerService.RetrieveCustomer.RetrieveCustomer",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveAccount" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/AccountManagement/RetrieveAccount/v1.1",
+                    "file": "/wsdl/WSDL_RetrieveAccount_v1.1.wsdl",
+                    "method": "RetrieveAccount.RetrieveAccount.RetrieveAccount",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveSubscriber" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CustomerManagement/RetrieveSubscriber/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveSubscriber_v1.0.wsdl",
+                    "method": "RetrieveSubscriber.RetrieveSubscriber.RetrieveSubscriber",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveCorporateGroupMembers" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CorporateManagement/RetrieveCorporateGroupMembers/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveCorporateGroupMembers_v1.0.wsdl",
+                    "method": "RetrieveCorporateGroupMembersService.RetrieveCorporateGroupMembers.RetrieveCorporateGroupMembers",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveCorporateGroups" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CorporateManagement/RetrieveCorporateGroups/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveCorporateGroup_v1.0.wsdl",
+                    "method": "RetrieveCorporateGroupsService.RetrieveCorporateGroups.RetrieveCorporateGroups",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveInvoice" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/BillingAndInvoices/RetrieveInvoice/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveInvoice_v1.0.wsdl",
+                    "method": "RetrieveInvoiceService.RetrieveInvoice.RetrieveInvoice",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveBillingInfo" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/BillingAndInvoices/RetrieveBillingInfo/v1.1",
+                    "file": "/wsdl/WSDL_RetrieveBillingInfo_v1.1.wsdl",
+                    "method": "RetrieveBillingInfoService.RetrieveBillingInfo.RetrieveBillingInfo",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveInvoicePayment" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/BillingAndInvoices/RetrieveInvoicePayment/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveInvoicePayment_v1.0.wsdl",
+                    "method": "RetrieveInvoicePaymentService.RetrieveInvoicePayment.RetrieveInvoicePayment",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "SendEmail" : {
+                    "uri": "/EnterpriseServices/BusinessServices/ServiceControlAndExecution/Communication/SendEmail/v1.1",
+                    "file": "/wsdl/WSDL_SendEmail_v1.1.wsdl",
+                    "method": "SendEmail.SendEmail.SendEmail",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "MakePayment" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/RevenueAndPaymentCollection/MakePayment/v1.0",
+                    "file": "/wsdl/WSDL_MakePayment_v1.0.wsdl",
+                    "method": "MakePaymentService.MakePayment.MakePayment",
+                    "apiurl": "http://10.100.114.118:16100"
+                }
+            },
+            "maxbillperiodrec" : 5
+        },
+        "EJSConfig" : {
+            "EmailTemplate" : {
+                "taxinvoice" : "/email_template/taxinvoice.html",
+                "usercreated"  : "/email_template/usercreated.html",
+                "userupdated" : "/email_template/userupdated.html",
+                "userdeleted" : "/email_template/userdeleted.html"
+            },
+            "ImageIP": "https://mydigibusinessatstg.digi.com.my//img/"
+        },
+        "ControllerConfig" : {
+            "overview" : {
+                "maxgroupduedaterec" : 10
+            }
+        },
+        "iPay88" :{
+            "merchantCode" : "M06252_S0012",
+            "merchantKey" : "sCK2RbZQ6I",
+            "redirectURL" : "https://mydigibusinessatstg.digi.com.my/sso/telenor/makepayment",
+            "userChannel" : "133"
+        }
+    },
+    "STAGING_2": {
+        "whitelist_domain": [
+            "http://localhost:3000",
+            "http://10.89.20.132:2006",
+            "http://10.89.20.136:443",
+            "http://10.89.20.136:3001",
+            "http://10.89.20.136:3003"
+        ],
+        "encryption" : true,
+        "encryption_key" : "01234567890qwertyuiopasdfghjklzxcvbnm",
+        "port" : 3001,
+        "debug" : true,
+        "http" : {
+            "timeout" : 15000
+        },
+        "token" : {
+            "key" : "@cnJak@rta"
+        },
+        "db" : {
+            "dialect"  : "postgres",
+            "host"     : "10.89.20.139",
+            "schema"   : "public",
+            "username" : "postgres",
+            "password" : "pinpass123",
+            "name"     : "ewp_stg_db_01",
+            "port"     : 3000,
+            "timezone" : "+07:00",
+            "pool"     : {
+                "min"  : 0,
+                "max"  : 5,
+                "idle" : 10000
+            },
+            "dialectOptions" : {
+                "ssl" : false
+            }
+        },
+        "dbOracle": {
+                "user":"EBILLACDC",
+                "password":"EBILLACDC",
+                "connectString":"10.100.114.32:1521/ebdev",
+                "maxFetchRows": 10000
+        },
+        "redis" : {
+            "redisConfig": {
+			"sentinels" : [
+                {"host": "10.89.20.139", "port": "16379" },
+                {"host": "10.89.20.140", "port": "16379" }],
+			"name" : "redis-cluster"
+            },
+            "attributes" : ["CH","LOA","CSV"]
+        },
+        "Ebill" : {
+            "downloadSingle" : "http://10.100.114.31/reporting/pdfbill.jsp",
+            "storage" : "/app/EWPSTG_02/REPORT/report_temp/",
+            "reportingSQLFile" : {
+                "usagedetails" : "/sqlfiles/usagedetails.sql",
+                "accountsummary" : "/sqlfiles/accountsummary.sql",
+                "totalbill" : "/sqlfiles/totalbill.sql",
+                "topusagenumber" : "/sqlfiles/topusagenumber.sql",
+                "domesticusage" : "/sqlfiles/domesticusage.sql",
+                "internationalroamingusage" : "/sqlfiles/internationalroamingusage.sql",
+                "internationalroamingcall" : "/sqlfiles/internationalroamingcall.sql",
+                "commitmentsharingrebate" : "/sqlfiles/commitmentsharingrebate.sql",
+                "billspayments" : "/sqlfiles/billspayments.sql",
+                "topspenders" : "/sqlfiles/topspenders.sql",
+                "internationalusage" : "/sqlfiles/internationalusage.sql",
+                "detailtotalcalls" : "/sqlfiles/detailtotalcalls.sql",
+                "detailtotalusage" : "/sqlfiles/detailtotalusage.sql"
+            }
+        },
+        "telenorConfig" : {
+            "clientId": "accenture-enterpriseadminportal-web",
+            "clientSecret" : "hH4r7qaYN9YC5N5NDoguR8njBW2dMzUbUxsKwHcNVbg=",
+            "baseURL" : "https://connect.staging.telenordigital.com",
+            "authorization" : "/oauth/authorize",
+            "token" : "/oauth/token",
+            "tokenInfo" : "/oauth/tokeninfo",
+            "userInfo" : "/oauth/userinfo",
+            "revokeToken" : "/oauth/revoke",
+            "userLogout" : "/oauth/logout",
+            "redirectUri" : "https://mydigibusinessatstg.digi.com.my/sso/telenor/callback",
+            "logoutRedirectUri" : "http://new.digi.com.my/home",
+            "responseType" : "code",
+            "scope" : "openid+profile+email+phone+id.user.email.read+id.user.phone.read+accenture.enterpriseadminportal",
+            "authMethod" : "connect_ui",
+            "acrVal" : "2"
+        },
+        "CSGConfig":{
+            "CSGUrl" : "http://10.100.114.118:16100",
+            "username" : "EWP",
+            "password" : "weblogic",
+            "header" : { 
+                "CSGHeader" : {
+                    "ReferenceId": "",
+                    "ChannelId": "EWP",
+                    "ChannelMedia": "WEB",
+                    "attributes": {
+                        "xmlns": "http://digi.com.my/"
+                    }
+                }
+            },
+            "runningNumber":"000839",
+            "listAPI" : {
+                "RetrieveCustomer" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CustomerManagement/RetrieveCustomer/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveCustomer_v1.0.wsdl",
+                    "method": "RetrieveCustomerService.RetrieveCustomer.RetrieveCustomer",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveAccount" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/AccountManagement/RetrieveAccount/v1.1",
+                    "file": "/wsdl/WSDL_RetrieveAccount_v1.1.wsdl",
+                    "method": "RetrieveAccount.RetrieveAccount.RetrieveAccount",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveSubscriber" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CustomerManagement/RetrieveSubscriber/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveSubscriber_v1.0.wsdl",
+                    "method": "RetrieveSubscriber.RetrieveSubscriber.RetrieveSubscriber",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveCorporateGroupMembers" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CorporateManagement/RetrieveCorporateGroupMembers/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveCorporateGroupMembers_v1.0.wsdl",
+                    "method": "RetrieveCorporateGroupMembersService.RetrieveCorporateGroupMembers.RetrieveCorporateGroupMembers",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveCorporateGroups" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CorporateManagement/RetrieveCorporateGroups/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveCorporateGroup_v1.0.wsdl",
+                    "method": "RetrieveCorporateGroupsService.RetrieveCorporateGroups.RetrieveCorporateGroups",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveInvoice" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/BillingAndInvoices/RetrieveInvoice/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveInvoice_v1.0.wsdl",
+                    "method": "RetrieveInvoiceService.RetrieveInvoice.RetrieveInvoice",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveBillingInfo" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/BillingAndInvoices/RetrieveBillingInfo/v1.1",
+                    "file": "/wsdl/WSDL_RetrieveBillingInfo_v1.1.wsdl",
+                    "method": "RetrieveBillingInfoService.RetrieveBillingInfo.RetrieveBillingInfo",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveInvoicePayment" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/BillingAndInvoices/RetrieveInvoicePayment/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveInvoicePayment_v1.0.wsdl",
+                    "method": "RetrieveInvoicePaymentService.RetrieveInvoicePayment.RetrieveInvoicePayment",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "SendEmail" : {
+                    "uri": "/EnterpriseServices/BusinessServices/ServiceControlAndExecution/Communication/SendEmail/v1.1",
+                    "file": "/wsdl/WSDL_SendEmail_v1.1.wsdl",
+                    "method": "SendEmail.SendEmail.SendEmail",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "MakePayment" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/RevenueAndPaymentCollection/MakePayment/v1.0",
+                    "file": "/wsdl/WSDL_MakePayment_v1.0.wsdl",
+                    "method": "MakePaymentService.MakePayment.MakePayment",
+                    "apiurl": "http://10.100.114.118:16100"
+                }
+            },
+            "maxbillperiodrec" : 5
+        },
+        "EJSConfig" : {
+            "EmailTemplate" : {
+                "taxinvoice" : "/email_template/taxinvoice.html",
+                "usercreated"  : "/email_template/usercreated.html",
+                "userupdated" : "/email_template/userupdated.html",
+                "userdeleted" : "/email_template/userdeleted.html"
+            },
+            "ImageIP": "https://mydigibusinessatstg.digi.com.my//img/"
+        },
+        "ControllerConfig" : {
+            "overview" : {
+                "maxgroupduedaterec" : 10
+            }
+        },
+        "iPay88" :{
+            "merchantCode" : "M06252_S0012",
+            "merchantKey" : "sCK2RbZQ6I",
+            "redirectURL" : "https://mydigibusinessatstg.digi.com.my/sso/telenor/makepayment",
+            "userChannel" : "133"
+        }
+    },
+    "DEV": {
+        "whitelist_domain": [
+            "http://localhost:3000",
+            "http://10.89.20.132:2006",
+            "http://10.89.20.136:443",
+            "http://10.89.20.136:3001",
+            "http://10.89.20.136:3003"
+        ],
+        "encryption" : true,
+        "encryption_key" : "01234567890qwertyuiopasdfghjklzxcvbnm",
+        "port" : 3002,
+        "debug" : true,
+        "http" : {
+            "timeout" : 15000
+        },
+        "token" : {
+            "key" : "@cnJak@rta"
+        },
+        "db" : {
+            "dialect"  : "postgres",
+            "host"     : "10.89.20.137",
+            "schema"   : "public",
+            "username" : "postgres",
+            "password" : "pinpass123",
+            "name"     : "ewp_dev_db",
+            "port"     : 3005,
+            "timezone" : "+07:00",
+            "pool"     : {
+                "min"  : 0,
+                "max"  : 5,
+                "idle" : 10000
+            },
+            "dialectOptions" : {
+                "ssl" : false
+            }
+        },
+        "dbOracle": {
+                "user":"EBILLACDC",
+                "password":"EBILLACDC",
+                "connectString":"10.100.114.32:1521/ebdev",
+                "maxFetchRows": 10000
+        },
+        "redis" : {
+            "redisConfig": {
+                "host" : "10.89.20.137",
+                "port" : "6379"
+            },
+            "attributes" : ["CH","LOA","CSV"]
+        },
+        "Ebill" : {
+            "downloadSingle" : "http://10.100.114.31/reporting/pdfbill.jsp",
+            "storage" : "/app/EWPDEV/REPORT/report_temp/",
+            "reportingSQLFile" : {
+                "usagedetails" : "/sqlfiles/usagedetails.sql",
+                "accountsummary" : "/sqlfiles/accountsummary.sql",
+                "totalbill" : "/sqlfiles/totalbill.sql",
+                "topusagenumber" : "/sqlfiles/topusagenumber.sql",
+                "domesticusage" : "/sqlfiles/domesticusage.sql",
+                "internationalroamingusage" : "/sqlfiles/internationalroamingusage.sql",
+                "internationalroamingcall" : "/sqlfiles/internationalroamingcall.sql",
+                "commitmentsharingrebate" : "/sqlfiles/commitmentsharingrebate.sql",
+                "billspayments" : "/sqlfiles/billspayments.sql",
+                "topspenders" : "/sqlfiles/topspenders.sql",
+                "internationalusage" : "/sqlfiles/internationalusage.sql",
+                "detailtotalcalls" : "/sqlfiles/detailtotalcalls.sql",
+                "detailtotalusage" : "/sqlfiles/detailtotalusage.sql"
+            }
+        },
+        "telenorConfig" : {
+            "clientId": "accenture-enterpriseadminportal-web",
+            "clientSecret" : "hH4r7qaYN9YC5N5NDoguR8njBW2dMzUbUxsKwHcNVbg=",
+            "baseURL" : "https://connect.staging.telenordigital.com",
+            "authorization" : "/oauth/authorize",
+            "token" : "/oauth/token",
+            "tokenInfo" : "/oauth/tokeninfo",
+            "userInfo" : "/oauth/userinfo",
+            "revokeToken" : "/oauth/revoke",
+            "userLogout" : "/oauth/logout",
+            "redirectUri": "http://10.89.20.136:4443/sso/telenor/callback",
+            "logoutRedirectUri" : "http://new.digi.com.my/home",
+            "responseType" : "code",
+            "scope" : "openid+profile+email+phone+id.user.email.read+id.user.phone.read+accenture.enterpriseadminportal",
+            "authMethod" : "connect_ui",
+            "acrVal" : "2"
+        },
+        "CSGConfig":{
+            "CSGUrl" : "http://10.100.114.118:16100",
+            "username" : "EWP",
+            "password" : "weblogic",
+            "header" : { 
+                "CSGHeader" : {
+                    "ReferenceId": "",
+                    "ChannelId": "EWP",
+                    "ChannelMedia": "WEB",
+                    "attributes": {
+                        "xmlns": "http://digi.com.my/"
+                    }
+                }
+            },
+            "runningNumber":"000839",
+            "listAPI" : {
+                "RetrieveCustomer" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CustomerManagement/RetrieveCustomer/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveCustomer_v1.0.wsdl",
+                    "method": "RetrieveCustomerService.RetrieveCustomer.RetrieveCustomer",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveAccount" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/AccountManagement/RetrieveAccount/v1.1",
+                    "file": "/wsdl/WSDL_RetrieveAccount_v1.1.wsdl",
+                    "method": "RetrieveAccount.RetrieveAccount.RetrieveAccount",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveSubscriber" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CustomerManagement/RetrieveSubscriber/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveSubscriber_v1.0.wsdl",
+                    "method": "RetrieveSubscriber.RetrieveSubscriber.RetrieveSubscriber",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveCorporateGroupMembers" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CorporateManagement/RetrieveCorporateGroupMembers/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveCorporateGroupMembers_v1.0.wsdl",
+                    "method": "RetrieveCorporateGroupMembersService.RetrieveCorporateGroupMembers.RetrieveCorporateGroupMembers",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveCorporateGroups" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CorporateManagement/RetrieveCorporateGroups/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveCorporateGroup_v1.0.wsdl",
+                    "method": "RetrieveCorporateGroupsService.RetrieveCorporateGroups.RetrieveCorporateGroups",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveInvoice" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/BillingAndInvoices/RetrieveInvoice/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveInvoice_v1.0.wsdl",
+                    "method": "RetrieveInvoiceService.RetrieveInvoice.RetrieveInvoice",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveBillingInfo" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/BillingAndInvoices/RetrieveBillingInfo/v1.1",
+                    "file": "/wsdl/WSDL_RetrieveBillingInfo_v1.1.wsdl",
+                    "method": "RetrieveBillingInfoService.RetrieveBillingInfo.RetrieveBillingInfo",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveInvoicePayment" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/BillingAndInvoices/RetrieveInvoicePayment/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveInvoicePayment_v1.0.wsdl",
+                    "method": "RetrieveInvoicePaymentService.RetrieveInvoicePayment.RetrieveInvoicePayment",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "SendEmail" : {
+                    "uri": "/EnterpriseServices/BusinessServices/ServiceControlAndExecution/Communication/SendEmail/v1.1",
+                    "file": "/wsdl/WSDL_SendEmail_v1.1.wsdl",
+                    "method": "SendEmail.SendEmail.SendEmail",
+                    "apiurl": "http://10.100.114.118:16100"
+                }
+            },
+            "maxbillperiodrec" : 5
+        },
+        "EJSConfig" : {
+            "EmailTemplate" : {
+                "contoh" : "/email_template/contoh.html",
+                "usercreated"  : "/email_template/usercreated.html",
+                "userupdated" : "/email_template/userupdated.html",
+                "userdeleted" : "/email_template/userdeleted.html"
+            },
+            "ImageIP": "http://10.89.20.136:3001//img/"
+        },
+        "ControllerConfig" : {
+            "overview" : {
+                "maxgroupduedaterec" : 10
+            }
+        },
+        "iPay88" :{
+            "merchantCode" : "M06252_S0012",
+            "merchantKey" : "sCK2RbZQ6I",
+            "redirectURL" : "http://10.89.20.136:3001/sso/telenor/makepayment",
+            "userChannel" : "133"
+        }
+    },
+    "SIT": {
+        "whitelist_domain": [
+            "http://localhost:3000",
+            "http://10.89.20.132:2006",
+            "http://10.89.20.136:443",
+            "http://10.89.20.136:3001",
+            "http://10.89.20.136:3003"
+        ],
+        "encryption" : true,
+        "encryption_key" : "01234567890qwertyuiopasdfghjklzxcvbnm",
+        "port" : 3004,
+        "debug" : true,
+        "http" : {
+            "timeout" : 15000
+        },
+        "token" : {
+            "key" : "@cnJak@rta"
+        },
+        "db" : {
+            "dialect"  : "postgres",
+            "host"     : "10.89.20.137",
+            "schema"   : "public",
+            "username" : "postgres",
+            "password" : "pinpass123",
+            "name"     : "ewp_sit_db",
+            "port"     : 3005,
+            "timezone" : "+07:00",
+            "pool"     : {
+                "min"  : 0,
+                "max"  : 5,
+                "idle" : 10000
+            },
+            "dialectOptions" : {
+                "ssl" : false
+            }
+        },
+        "dbOracle": {
+                "user":"EBILLACDC",
+                "password":"EBILLACDC",
+                "connectString":"10.100.114.32:1521/ebdev",
+                "maxFetchRows": 10000
+        },
+        "redis" : {
+            "redisConfig": {
+                "host" : "10.89.20.137",
+                "port" : "16379"
+            },
+            "attributes" : ["CH","LOA","CSV"]
+        },
+        "Ebill" : {
+            "downloadSingle" : "http://10.100.114.31/reporting/pdfbill.jsp",
+            "storage" : "/app/EWPSIT/REPORT/report_temp/",
+            "reportingSQLFile" : {
+                "usagedetails" : "/sqlfiles/usagedetails.sql",
+                "accountsummary" : "/sqlfiles/accountsummary.sql",
+                "totalbill" : "/sqlfiles/totalbill.sql",
+                "topusagenumber" : "/sqlfiles/topusagenumber.sql",
+                "domesticusage" : "/sqlfiles/domesticusage.sql",
+                "internationalroamingusage" : "/sqlfiles/internationalroamingusage.sql",
+                "internationalroamingcall" : "/sqlfiles/internationalroamingcall.sql",
+                "commitmentsharingrebate" : "/sqlfiles/commitmentsharingrebate.sql",
+                "billspayments" : "/sqlfiles/billspayments.sql",
+                "topspenders" : "/sqlfiles/topspenders.sql",
+                "internationalusage" : "/sqlfiles/internationalusage.sql",
+                "detailtotalcalls" : "/sqlfiles/detailtotalcalls.sql",
+                "detailtotalusage" : "/sqlfiles/detailtotalusage.sql"
+            }
+        },
+        "telenorConfig" : {
+            "clientId": "accenture-enterpriseadminportal-web",
+            "clientSecret" : "hH4r7qaYN9YC5N5NDoguR8njBW2dMzUbUxsKwHcNVbg=",
+            "baseURL" : "https://connect.staging.telenordigital.com",
+            "authorization" : "/oauth/authorize",
+            "token" : "/oauth/token",
+            "tokenInfo" : "/oauth/tokeninfo",
+            "userInfo" : "/oauth/userinfo",
+            "revokeToken" : "/oauth/revoke",
+            "userLogout" : "/oauth/logout",
+            "redirectUri": "http://10.89.20.136:3443/sso/telenor/callback",
+            "logoutRedirectUri" : "http://new.digi.com.my/home",
+            "responseType" : "code",
+            "scope" : "openid+profile+email+phone+id.user.email.read+id.user.phone.read+accenture.enterpriseadminportal",
+            "authMethod" : "connect_ui",
+            "acrVal" : "2"
+        },
+        "CSGConfig":{
+            "CSGUrl" : "http://10.100.114.118:16100",
+            "username" : "EWP",
+            "password" : "weblogic",
+            "header" : { 
+                "CSGHeader" : {
+                    "ReferenceId": "",
+                    "ChannelId": "EWP",
+                    "ChannelMedia": "WEB",
+                    "attributes": {
+                        "xmlns": "http://digi.com.my/"
+                    }
+                }
+            },
+            "runningNumber":"000839",
+            "listAPI" : {
+                "RetrieveCustomer" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CustomerManagement/RetrieveCustomer/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveCustomer_v1.0.wsdl",
+                    "method": "RetrieveCustomerService.RetrieveCustomer.RetrieveCustomer",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveAccount" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/AccountManagement/RetrieveAccount/v1.1",
+                    "file": "/wsdl/WSDL_RetrieveAccount_v1.1.wsdl",
+                    "method": "RetrieveAccount.RetrieveAccount.RetrieveAccount",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveSubscriber" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CustomerManagement/RetrieveSubscriber/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveSubscriber_v1.0.wsdl",
+                    "method": "RetrieveSubscriber.RetrieveSubscriber.RetrieveSubscriber",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveCorporateGroupMembers" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CorporateManagement/RetrieveCorporateGroupMembers/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveCorporateGroupMembers_v1.0.wsdl",
+                    "method": "RetrieveCorporateGroupMembersService.RetrieveCorporateGroupMembers.RetrieveCorporateGroupMembers",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveCorporateGroups" : {
+                    "uri": "/EnterpriseServices/BusinessServices/CustomerRelationshipManagement/CorporateManagement/RetrieveCorporateGroups/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveCorporateGroup_v1.0.wsdl",
+                    "method": "RetrieveCorporateGroupsService.RetrieveCorporateGroups.RetrieveCorporateGroups",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveInvoice" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/BillingAndInvoices/RetrieveInvoice/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveInvoice_v1.0.wsdl",
+                    "method": "RetrieveInvoiceService.RetrieveInvoice.RetrieveInvoice",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveBillingInfo" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/BillingAndInvoices/RetrieveBillingInfo/v1.1",
+                    "file": "/wsdl/WSDL_RetrieveBillingInfo_v1.1.wsdl",
+                    "method": "RetrieveBillingInfoService.RetrieveBillingInfo.RetrieveBillingInfo",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "RetrieveInvoicePayment" : {
+                    "uri": "/EnterpriseServices/BusinessServices/BillingAndRevenueManagement/BillingAndInvoices/RetrieveInvoicePayment/v1.0",
+                    "file": "/wsdl/WSDL_RetrieveInvoicePayment_v1.0.wsdl",
+                    "method": "RetrieveInvoicePaymentService.RetrieveInvoicePayment.RetrieveInvoicePayment",
+                    "apiurl": "http://10.100.114.118:16100"
+                },
+                "SendEmail" : {
+                    "uri": "/EnterpriseServices/BusinessServices/ServiceControlAndExecution/Communication/SendEmail/v1.1",
+                    "file": "/wsdl/WSDL_SendEmail_v1.1.wsdl",
+                    "method": "SendEmail.SendEmail.SendEmail",
+                    "apiurl": "http://10.100.114.118:16100"
+                }
+            },
+            "maxbillperiodrec" : 5
+        },
+        "EJSConfig" : {
+            "EmailTemplate" : {
+                "contoh" : "/email_template/contoh.html",
+                "usercreated"  : "/email_template/usercreated.html",
+                "userupdated" : "/email_template/userupdated.html",
+                "userdeleted" : "/email_template/userdeleted.html"
+            },
+            "ImageIP": "http://10.89.20.136:3003//img/"
+        },
+        "ControllerConfig" : {
+            "overview" : {
+                "maxgroupduedaterec" : 10
+            }
+        },
+        "iPay88" :{
+            "merchantCode" : "M06252_S0012",
+            "merchantKey" : "sCK2RbZQ6I",
+            "redirectURL" : "http://10.89.20.136:3003/sso/telenor/makepayment",
+            "userChannel" : "133"
+        }
+    }
+}
