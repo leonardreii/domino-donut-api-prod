@@ -33,15 +33,6 @@ let whiteList = (origin) => {
     else
         return data[0];
 }
-// var rawBodySaver = function (req, res, buf, encoding) {
-//     if (buf && buf.length) {
-//         req.rawBody = buf.toString(encoding || 'utf8');
-//         console.log("isi!!! : " + req.rawBody);
-//     }
-// }
-// app.use(bodyParser.json({ verify: rawBodySaver }));
-// app.use(bodyParser.urlencoded({ verify: rawBodySaver, extended: true }));
-// app.use(bodyParser.raw({ verify: rawBodySaver, type: function () { return true } }));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -84,8 +75,6 @@ app.use(function (req, res, next) {
 
         res.json = function (param) {
             var data = param;
-            Logging("test");
-            Logging(data);
             data = enc.getEncrypted(JSON.stringify(data));
             f.call(this, data);
         }
