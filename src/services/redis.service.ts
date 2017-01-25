@@ -1,5 +1,9 @@
-import {Logging} from './logging.service';
-import {ErrorHandlingService} from './error-handling.service';
+import { Logging } from './logging.service';
+import { ErrorHandlingService } from './error-handling.service';
+
+import { DriverModel } from './../model/driver.model';
+import { CustomerModel } from './../model/customer.model';
+
 var vEnv = require('../config/mode.json')['mode'];
 const vConfig = require('../config/config.json')[vEnv];
 var redis = require('ioredis');
@@ -10,8 +14,11 @@ var vDate = new Date(vToday);
 
 export class RedisService {
 	public static client;
+	public static geo;
 	public static up = false;
-	public static errordesc = "Error while establishing database connection with redis";
+	public static errordesc = "Error while establishing connection with redis";
+	public static availabledriverlist = "availabledriver";
+	public static ongoingdriverlist = "ongoingdriver";
 
 	constructor(){
 		try{
@@ -45,6 +52,7 @@ export class RedisService {
 				Logging("Redis is connected.");
 				RedisService.up=true;
 			});
+			RedisService.geo = require('georedis').initialize(RedisService.client);
 		}
 		catch(pErr){
 			Logging('Error while establishing database connection with redis : ' + pErr);
@@ -61,69 +69,32 @@ export class RedisService {
 		}
 	}
 
-	public static async setVal(val,key,time?){
+	public static async registerDriver(pdriver:DriverModel){
 		try{
-			RedisService.errorHandling();
-			let setResponse = await RedisService.client.setAsync(key,val);
-			if(time != undefined && time != "" && time != null){
-				let expireResponse = await RedisService.client.expireatAsync(key, time);
-			}
-			return true;
+			RedisService.client.hset(RedisService.availabledriverlist,pdriver.getID(),pdriver.getLat()+','+pdriver.getLng());
 		}
-		catch(pErr){
-			ErrorHandlingService.throwError(703,'Error while set data to redis');
-			return false;
+		catch(err){
+			Logging(RedisService.errordesc + err);
+			throw 401;
 		}
 	}
-
-	public static async getVal(key){
+	public static async unregisterDriver(pdriverid:string){
 		try{
-			RedisService.errorHandling();
-			//var data = RedisService.timeLimited(RedisService.client.getAsync(key),5500);
-			var data = await RedisService.client.getAsync(key);
-			return data;
+			RedisService.client.hdel(RedisService.availabledriverlist,pdriverid);
 		}
-		catch(pErr){
-			Logging(pErr);
-			ErrorHandlingService.throwError(703,'Error while retrieve data to redis');
-			return null;
+		catch(err){
+			Logging(RedisService.errordesc + err);
+			throw 401;
 		}
 	}
-
-	public static async checkExists(val){
+	public static async getAvailableDriverList(){
 		try{
-			RedisService.errorHandling();
-			var data = await RedisService.client.existsAsync(val);
-			return data;
-		}catch(pErr){
-			ErrorHandlingService.throwError(703,'Error while check data to redis');
-			return null;
+			var result = await RedisService.client.hgetall(RedisService.availabledriverlist);
+			return result;
 		}
-	}
-	public static async delSpecificKey(key){
-		try{
-		RedisService.errorHandling();
-		await RedisService.client.delAsync(key);
-		}
-		catch(pErr){
-			ErrorHandlingService.throwError(703,'Error while delete data from redis');
-			return null;
-		}
-	}
-	public static async delKey(key_msisdn){
-		// Example syntax delKey('6281910110748');
-		try{
-		RedisService.errorHandling();
-		let attributes = vConfig.redis.attributes;
-		let delResponse=[];
-			for (var i in attributes){
-				delResponse[i] = await RedisService.client.delAsync(key_msisdn+":"+attributes[i]);
-			}
-			return delResponse;
-		}
-		catch(pErr){
-			ErrorHandlingService.throwError(703,'Error while delete data from redis');
-			return null;
+		catch(err){
+			Logging(RedisService.errordesc + err);
+			throw 401;
 		}
 	}
 }

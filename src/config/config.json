@@ -7,7 +7,7 @@
             "http://10.89.20.136:3001",
             "http://10.89.20.136:3003"
         ],
-        "encryption" : true,
+        "encryption" : false,
         "encryption_key" : "01234567890qwertyuiopasdfghjklzxcvbnm",
         "port" : 4000,
         "debug" : true,
@@ -24,7 +24,7 @@
             "schema"   : "public",
             "username" : "postgres",
             "password" : "admin",
-            "name"     : "digi",
+            "name"     : "sera",
             "port"     : 5432,
             "timezone" : "+07:00",
             "pool"     : {
