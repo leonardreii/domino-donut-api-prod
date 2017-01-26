@@ -17,7 +17,7 @@ export class CustomerController{
         var customer:CustomerModel = new CustomerModel(pRequest.body.customerid,pRequest.body.lat, pRequest.body.lng);
 
         try{
-            var driverList = await RedisService.getAvailableDriverList();
+            var driverList:any = await RedisService.getAvailableDriverList();
 
             var nearest=999999;
             var chosenDriver:DriverModel;

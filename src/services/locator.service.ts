@@ -4,7 +4,7 @@ export class LocatorService{
     public static deg2rad(angle: number) {
         return angle * 0.017453292519943295;
     }
-    public static countDistance(platfrom, plngfrom, platto, plngto) {
+    public static countDistance(platfrom:any, plngfrom:any, platto:any, plngto:any) {
         let latFrom: number = this.deg2rad(platfrom);
         let longFrom: number = this.deg2rad(plngfrom);
         let latTo: number = this.deg2rad(platto);

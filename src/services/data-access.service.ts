@@ -15,7 +15,7 @@ export class DataAccessService{
 			function(pResolve, pReject) {
 				try{
 					// build stored procedure params
-					let vParams;
+					let vParams:string;
 					// if we pass a JSON as parameter
 					// make sure that the created stored procedure accept 1 param with type of JSON
 					if(pIsJSONFormat) {
@@ -40,7 +40,7 @@ export class DataAccessService{
 					// build query to execute stored procedure
 					let vSQL = 'SELECT ' + pSPName + vParams;
 					// console.log(vSQL);
-					SequelizeService.sequelize.query(vSQL, { type: SequelizeService.sequelize.QueryTypes.SELECT }).then(function(pResult){
+					SequelizeService.sequelize.query(vSQL, { type: SequelizeService.sequelize.QueryTypes.SELECT }).then(function(pResult:any){
 						// stored procedure will return 0 if there is no errors
 						let vResult = pResult[0][pSPName.toLowerCase()];
 						if(vResult.status === 0) {
@@ -53,7 +53,7 @@ export class DataAccessService{
 							Logging('Result : ' + JSON.stringify(vResult));
 							ErrorHandlingService.throwPromiseError(pReject,vResult.error_code,vResult.error_msg);
 						}
-					}).catch(function(pErr){
+					}).catch(function(pErr:any){
 						Logging('Error while executing query : ' + vSQL);
 						// throwing error from the sequelize
 						Logging('Error ' + pErr);
