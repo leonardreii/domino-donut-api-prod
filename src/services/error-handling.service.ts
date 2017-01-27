@@ -1,3 +1,4 @@
+declare var require:any;
 var ErrorConfig = require('../config/error.json');
 var vEnv = require('../config/mode.json')['mode'];
 var config = require('../config/config.json')[vEnv];

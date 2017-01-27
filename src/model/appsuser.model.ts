@@ -1,9 +1,9 @@
 export class AppsUserModel{
-    private id;
-    private lat;
-    private lng;
+    private id:any;
+    private lat:any;
+    private lng:any;
 
-    constructor(pid?, plat?, plng?){
+    constructor(pid?:any, plat?:any, plng?:any){
         if(pid)
             this.setID(pid);
         else
@@ -20,13 +20,13 @@ export class AppsUserModel{
             this.lng=0;
     }
 
-    public setID(pid){
+    public setID(pid:any){
         this.id = pid;
     }
-    public setLat(plat){
+    public setLat(plat:any){
         this.lat = plat;
     }
-    public setLng(plng){
+    public setLng(plng:any){
         this.lng=plng;
     }
 
