@@ -10,5 +10,8 @@
     "1004" : "Suspended account",
     "_2000" : "General error (order)",
     "_2001" : "Invalid parameters - Order",
-    "2002" : "Order is not exists"
+    "2002" : "Order is not exists",
+    "_3000" : "General error (order)",
+    "3001" : "Invalid parameters - Driver",
+    "3002" : "Driver is not exists"
 }

@@ -9,6 +9,7 @@ export function Routing(router:any){
 
     const driverController:DriverController = new DriverController();
     router.post('/driver/registerdriver',driverController.registerDriver);
+    router.get('/driver/detail/:driverid',driverController.getDriverDetails);
 
     const customerController:CustomerController = new CustomerController();
     router.post('/customer/finddriver',customerController.findDriver);
