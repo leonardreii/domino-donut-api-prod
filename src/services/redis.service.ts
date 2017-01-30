@@ -17,8 +17,9 @@ export class RedisService {
 	public static geo;
 	public static up = false;
 	public static errordesc = "Error while establishing connection with redis";
-	public static availabledriverlist = "availabledriver";
-	public static ongoingdriverlist = "ongoingdriver";
+	public static ACTIVE_DRIVER_LIST_NAME = "activedriverlist";
+	public static INACTIVE_DRIVER_LIST_NAME = "inactivedrivrerlist";
+	public static ONGOING_DRIVER_LIST_NAME = "ongoingdriverlist";
 
 	constructor(){
 		try{
@@ -69,27 +70,38 @@ export class RedisService {
 		}
 	}
 
-	public static async registerDriver(pdriver:DriverModel){
+	public static async refreshDriverList(pdriver:DriverModel){
 		try{
-			RedisService.client.hset(RedisService.availabledriverlist,pdriver.getID(),pdriver.getLat()+','+pdriver.getLng());
+			var listname="";
+			var notlistname1="";
+			var notlistname2="";
+			if(pdriver.getStatus()=="active"){
+				listname=RedisService.ACTIVE_DRIVER_LIST_NAME;
+				notlistname1=RedisService.ONGOING_DRIVER_LIST_NAME;
+				notlistname2=RedisService.INACTIVE_DRIVER_LIST_NAME
+			}
+			else if(pdriver.getStatus()=="inactive"){
+				listname=RedisService.INACTIVE_DRIVER_LIST_NAME;
+				notlistname1=RedisService.ACTIVE_DRIVER_LIST_NAME;
+				notlistname2=RedisService.ONGOING_DRIVER_LIST_NAME;
+			}
+			else if(pdriver.getStatus()=="ongoing"){
+				listname=RedisService.ONGOING_DRIVER_LIST_NAME;
+				notlistname2=RedisService.ACTIVE_DRIVER_LIST_NAME;
+				notlistname1=RedisService.INACTIVE_DRIVER_LIST_NAME;
+			}
+			RedisService.client.hset(listname,pdriver.getID(),pdriver.getLat()+','+pdriver.getLng());
+			RedisService.client.hdel(notlistname1,pdriver.getID());
+			RedisService.client.hdel(notlistname2,pdriver.getID());
 		}
 		catch(err){
 			Logging(RedisService.errordesc + err);
 			throw 401;
 		}
 	}
-	public static async unregisterDriver(pdriverid:string){
+	public static async getActiveDriverList(){
 		try{
-			RedisService.client.hdel(RedisService.availabledriverlist,pdriverid);
-		}
-		catch(err){
-			Logging(RedisService.errordesc + err);
-			throw 401;
-		}
-	}
-	public static async getAvailableDriverList(){
-		try{
-			var result = await RedisService.client.hgetall(RedisService.availabledriverlist);
+			var result = await RedisService.client.hgetall(RedisService.ACTIVE_DRIVER_LIST_NAME);
 			return result;
 		}
 		catch(err){

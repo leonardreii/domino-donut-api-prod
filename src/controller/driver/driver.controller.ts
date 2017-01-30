@@ -12,23 +12,14 @@ export class DriverController{
         Logging('Initialize Driver Controller');
     }
 
-    async registerDriver(pRequest: any, pResponse: any){
-        var driver:DriverModel = new DriverModel(pRequest.body.driverid, pRequest.body.lat, pRequest.body.lng);
+    async updateDriver(pRequest: any, pResponse: any){
+        var driver:DriverModel = new DriverModel(pRequest.body.driverid, pRequest.body.lat, pRequest.body.lng, pRequest.body.status);
         try{
-            RedisService.registerDriver(driver);
+            RedisService.refreshDriverList(driver);
             pResponse.status(200).json({result:'successful'});
         }
         catch(err){
-            ErrorHandlingService.throwHTTPErrorResponse(err.desc, 1000, err.code, err.desc);
-        }
-    }
-    async unregisterDriver(pRequest:any, pResponse:any){
-        try{
-            RedisService.unregisterDriver(pRequest.body.driverid);
-            pResponse.status(200).json({result:'successful'});
-        }
-        catch(err){
-            ErrorHandlingService.throwHTTPErrorResponse(err.desc, 1000, err.code, err.desc);
+            ErrorHandlingService.throwHTTPErrorResponse(pResponse, 400, 2000, "Error updating driver data");
         }
     }
 }
