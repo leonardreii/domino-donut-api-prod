@@ -13,8 +13,8 @@ var vToday = Date.now();
 var vDate = new Date(vToday);
 
 export class RedisService {
-	public static client;
-	public static geo;
+	public static client:any;
+	public static geo:any;
 	public static up = false;
 	public static errordesc = "Error while establishing connection with redis";
 	public static ACTIVE_DRIVER_LIST_NAME = "activedriverlist";
@@ -26,7 +26,7 @@ export class RedisService {
 			Logging("initialize redis service");
 			let conf = vConfig.redis.redisConfig;
 			conf.retry_unfulfilled_commands=false;
-			conf.retry_strategy = function (options):any {
+			conf.retry_strategy = function (options:any):any {
 				Logging(options.error);
 				RedisService.up = false;
 				RedisService.errordesc = options.error;
@@ -35,21 +35,21 @@ export class RedisService {
             RedisService.client = bluebird.promisifyAll(redis.createClient(
 				conf
 			));
-			RedisService.client.on("error",function(err){
+			RedisService.client.on("error",function(err:any){
 				Logging('Error has been occured.');
 			});
-			RedisService.client.on("reconnecting",function(err){
+			RedisService.client.on("reconnecting",function(err:any){
 				Logging('Reconnecting to redis server.');
 			});
-			RedisService.client.on("end",function(err){
+			RedisService.client.on("end",function(err:any){
 				Logging('Redis connection has been closed.');
 				RedisService.up = false;
 			});
-			RedisService.client.on("ready",function(err){
+			RedisService.client.on("ready",function(err:any){
 				Logging("Redis is up.");
 				RedisService.up=true;
 			});
-			RedisService.client.on("connect",function(err){
+			RedisService.client.on("connect",function(err:any){
 				Logging("Redis is connected.");
 				RedisService.up=true;
 			});
@@ -60,7 +60,7 @@ export class RedisService {
 			throw 401;
 		}
 	}
-	public static errorHandling(desc?){
+	public static errorHandling(desc?:any){
 		if(RedisService.up == false){
 			Logging(RedisService.errordesc);
 			if(desc == undefined)

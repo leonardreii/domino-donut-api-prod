@@ -4,7 +4,7 @@ import { DriverController } from './controller/driver/driver.controller';
 import { CustomerController } from './controller/customer/customer.controller';
 import { LoginController } from './controller/login/login.controller';
 
-export function Routing(router){
+export function Routing(router:any){
     const tokenService: Token = new Token();
 
     const driverController:DriverController = new DriverController();
