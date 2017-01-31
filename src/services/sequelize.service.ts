@@ -1,4 +1,5 @@
 import {Logging} from './logging.service';
+declare var require:any;
 var vEnv = require('../config/mode.json')['mode'];
 const vConfig = require('../config/config.json')[vEnv];
 var vSequelize = require("sequelize");
@@ -7,7 +8,7 @@ var vToday = Date.now();
 var vDate = new Date(vToday);
 
 export class SequelizeService {
-	public static sequelize;
+	public static sequelize:any;
 
 	constructor(){
 		try{

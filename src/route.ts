@@ -7,7 +7,7 @@ export function Routing(router){
     const tokenService: Token = new Token();
 
     const driverController:DriverController = new DriverController();
-    router.post('/driver/registerdriver',driverController.updateDriver);
+    router.post('/driver/updatedriver',driverController.updateDriver);
 
     const customerController:CustomerController = new CustomerController();
     router.post('/customer/finddriver',customerController.findDriver);

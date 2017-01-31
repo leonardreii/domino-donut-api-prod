@@ -1,12 +1,11 @@
-/// <reference path="../typings/index.d.ts" />
 'use strict';
 import { Routing } from './route';
 import { Logging } from './services/logging.service';
-import { WLog } from './services/logging.service';
 import { SequelizeService } from './services/sequelize.service';
 import { RedisService } from './services/redis.service';
 import { DataAccessService } from './services/data-access.service';
 import {EncryptionService} from './services/encryption.service';
+declare var require:any;
 
 var express = require('express');
 var vEnv = require('./config/mode.json')['mode'];
@@ -19,10 +18,8 @@ const port: number = config.port || 4000;
 let seq: SequelizeService = new SequelizeService();
 let enc: EncryptionService = new EncryptionService();
 let red: RedisService = new RedisService();
-let wlog: WLog = new WLog();
 let allow: string;
-var cookieParser = require('cookie-parser');
-let whiteList = (origin) => {
+let whiteList = (origin:string) => {
     var data = config.whitelist_domain;
     for (let i in data) {
         if (origin == data[i])
@@ -33,15 +30,13 @@ let whiteList = (origin) => {
     else
         return data[0];
 }
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cookieParser());
 
-app.use(function (req, res, next) {
+app.use(function (req:any, res:any, next:any) {
     //update
     let origin = req.get('origin');
-    let vOrigin = whiteList(origin);
+    let vOrigin = origin;//whiteList(origin);
     res.header("Access-Control-Allow-Origin", vOrigin);
     res.header("Access-Control-Allow-Credentials", "true");
     res.header("Access-Control-Allow-Headers",
@@ -62,23 +57,12 @@ app.use(function (req, res, next) {
     let f2 = res.json;
     
     if (encryption){
-        res.oldSend = function (param) {
-            var data = param;
-            this.encrypt = false;
-            f.call(this, data);
-        }
-        res.oldJson = function (param) {
-            var data = param;
-            this.encrypt = false;
-            f2.call(this, data);
-        }
-
-        res.json = function (param) {
+        res.json = function (param:any) {
             var data = param;
             data = enc.getEncrypted(JSON.stringify(data));
             f.call(this, data);
         }
-        res.send = function (param) {
+        res.send = function (param:any) {
             var data = param;
             var param2 = this.encrypt;
             if (param2 == undefined && Object.prototype.toString.call(data) == "[object Object]")
@@ -133,10 +117,10 @@ app.use(function (req, res, next) {
             Logging(req.body);
             
             // convert string to JSON Object
-            var y = {};
-            req.body.split(';').map(function (i) {
+            var y:any = {};
+            req.body.split(';').map(function (i:any) {
                 return i.split('=')
-                }).forEach(function (j) {
+                }).forEach(function (j:any) {
                 y[j[0].trim()] = j[1]
             });
             Logging(y);
