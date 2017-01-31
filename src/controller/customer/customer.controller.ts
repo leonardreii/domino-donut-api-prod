@@ -18,19 +18,11 @@ export class CustomerController{
 
     async estimateTrip(pRequest:any, pResponse:any){
         if(pRequest.body.latfrom==undefined||pRequest.body.lngfrom==undefined||
-                pRequest.body.latto==undefined||pRequest.body.lngto==undefined){
+                pRequest.body.latto==undefined||pRequest.body.lngto==undefined||pRequest.body.units==undefined){
             ErrorHandlingService.throwHTTPErrorResponse(pResponse, 400, 100, "Invalid Parameter");
             return;      
         }
         try{
-            var km = LocatorService.countDistance(pRequest.body.latfrom, pRequest.body.lngfrom, 
-                                                    pRequest.body.latto, pRequest.body.lngto);
-            var price = km*3000;
-            var result={
-                'distance':km,
-                'units':"km",
-                'price':price
-            };
             // response sent by the GoogleAPIService                       hereee
             var tripEstimation = await GoogleAPIService.getTripEstimation(pResponse,pRequest.body.latfrom, pRequest.body.lngfrom, 
                                                     pRequest.body.latto, pRequest.body.lngto,pRequest.body.units);
