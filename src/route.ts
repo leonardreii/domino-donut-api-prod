@@ -1,22 +1,22 @@
-import {Token} from './services/token.service';
-import {LoginController} from './controller/login/login.controller';
+import { Token } from './services/token.service';
 import { DriverController } from './controller/driver/driver.controller';
 import { CustomerController } from './controller/customer/customer.controller';
 import { OrderController } from './controller/order/order.controller';
 import { CorporateController } from './controller/corporate/corporate.controller';
+import { LoginController } from './controller/login/login.controller';
 
 export function Routing(router:any){
     const tokenService: Token = new Token();
 
     const driverController:DriverController = new DriverController();
-    router.post('/driver/registerdriver',driverController.registerDriver);
-    router.get('/driver/detail/:driverid',driverController.getDriverDetails);
+    router.post('/driver/updatedriver',driverController.updateDriver);
 
     const customerController:CustomerController = new CustomerController();
     router.post('/customer/finddriver',customerController.findDriver);
+    router.post('/customer/estimatetrip',customerController.estimateTrip);
 
-    const loginController: LoginController = new LoginController();
-    router.post('/login/authorization',loginController.authorize);
+    const loginController:LoginController = new LoginController();
+    router.post('/login/authorization',loginController.authorize); 
 
     const orderCtrl:OrderController = new OrderController();
     router.put('/order/cancelorder',orderCtrl.CancelOrder);
