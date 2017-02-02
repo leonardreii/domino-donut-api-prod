@@ -13,5 +13,8 @@
     "2002" : "Order is not exists",
     "_3000" : "General error (order)",
     "3001" : "Invalid parameters - Driver",
-    "3002" : "Driver is not exists"
+    "3002" : "Driver is not exists",
+    "_4000" : "General error (corporate)",
+    "4001" : "Invalid parameters - Corporate",
+    "4002" : "Corporate name is already exists"
 }
