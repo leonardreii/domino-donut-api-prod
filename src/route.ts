@@ -10,6 +10,8 @@ export function Routing(router:any){
 
     const driverController:DriverController = new DriverController();
     router.post('/driver/updatedriver',driverController.updateDriver);
+    router.get('/driver/driverdetail/:driverid',driverController.getDriverDetails);
+    router.post('/driver/getdriverlist',driverController.getDriverListPaging);
 
     const customerController:CustomerController = new CustomerController();
     router.post('/customer/finddriver',customerController.findDriver);
@@ -19,7 +21,7 @@ export function Routing(router:any){
     router.post('/login/authorization',loginController.authorize); 
 
     const orderCtrl:OrderController = new OrderController();
-    router.put('/order/cancelorder',orderCtrl.CancelOrder);
+    router.put('/order/orderstatus',orderCtrl.updateOrderStatus);
 
     const corporateCtrl:CorporateController = new CorporateController();
     router.post('/corporate/getcorporatelist',corporateCtrl.getCorporateListPaging);
