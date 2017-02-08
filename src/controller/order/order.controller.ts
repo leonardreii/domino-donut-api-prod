@@ -7,7 +7,7 @@ export class OrderController {
         Logging('Initalize Order Controller');
     }
 
-    async CancelOrder(pRequest: any, pResponse: any){
+    async updateOrderStatus(pRequest: any, pResponse: any){
         try {
             if (pRequest.body.orderid == undefined || pRequest.body.orderid == null ||
                 pRequest.body.orderstatus == undefined || pRequest.body.orderstatus == null) {

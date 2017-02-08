@@ -34,6 +34,41 @@ export class DriverController{
         }
     }
 
+    async getDriverListPaging(pRequest:any, pResponse:any){
+        try {
+            if (pRequest.body.page == undefined || pRequest.body.page == null ||
+                pRequest.body.row == undefined || pRequest.body.row == null ||
+                pRequest.body.sortby == undefined || pRequest.body.sortby == null ||
+                pRequest.body.sorttype == undefined || pRequest.body.sorttype == null) {
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 400, 3001, 'Invalid parameters - Driver');
+                return;
+            }
+
+            var vFirstName = pRequest.body.firstname;
+            var vLocation = pRequest.body.location;
+            var vonlineStatus = pRequest.body.onlinestatus;
+
+            let vData:any = new DriverModel().getDriverBody(null, vFirstName, null,null,null,null,vLocation,null,vonlineStatus);
+
+            vData['ppage'] = pRequest.body.page;
+            vData['prow'] = pRequest.body.row;
+            vData['psortby'] = pRequest.body.sortby;
+            vData['psorttype'] = pRequest.body.sorttype;
+
+            let payload = await DataAccessService.executeSP('get_driverlistpaging',vData, true);
+            pResponse.status(200).send(payload);
+        }
+        catch (err) {
+            Logging(err);
+            if (err.code){
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, err.code, err.desc);
+            }
+            else{
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 2000, 'General error : ' + err);
+            }
+        }
+    }
+
     async getDriverDetails(pRequest:any, pResponse:any){
         try {
             Logging("driverid : " + pRequest.params.driverid);
