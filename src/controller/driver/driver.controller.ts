@@ -14,14 +14,20 @@ export class DriverController{
 
     async updateDriver(pRequest: any, pResponse: any){
         if(pRequest.body.driverid==undefined||pRequest.body.lat==undefined||
-           pRequest.body.driverid.lng==undefined||pRequest.body.driverid.status==undefined){
+           pRequest.body.lng==undefined||pRequest.body.status==undefined){
                 ErrorHandlingService.throwHTTPErrorResponse(pResponse, 400, 3001, 'Invalid parameters - Driver');
                 return;
         }
         var driver:DriverModel = new DriverModel(pRequest.body.driverid, pRequest.body.lat, pRequest.body.lng, pRequest.body.status);
         try{
             RedisService.refreshDriverList(driver);
-            pResponse.status(200).json({result:'successful'});
+            // for dummy data...
+            // for(let i=0;i<500;i++){
+            //     var temp:DriverModel = new DriverModel(i.toString(), 
+            //                 6+i/1000+i/100+i/10+0.000013412,108+i/1000+i/100+i/10+0.000013412,"active");
+            //     RedisService.refreshDriverList(temp);
+            // }
+            // pResponse.status(200).json({result:'successful'});
         }
         catch(err){
             ErrorHandlingService.throwHTTPErrorResponse(pResponse, 400, 2000, "Error updating driver data");
@@ -50,6 +56,19 @@ export class DriverController{
             else{
                 ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 2000, 'General error : ' + err);
             }
+        }
+    }
+
+
+    async getData(pRequest:any, pResponse:any){
+        try{
+            var params={
+
+            };
+            //let result = await DataAccessService.executeSP();
+        }
+        catch(err){
+
         }
     }
 }

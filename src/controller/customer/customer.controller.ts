@@ -38,7 +38,7 @@ export class CustomerController{
             ErrorHandlingService.throwHTTPErrorResponse(pResponse, 400, 100, "Invalid Parameter");
             return;
         }
-        var customer:CustomerModel = new CustomerModel(pRequest.body.customerid,pRequest.body.lat, pRequest.body.lng);
+        var customer:CustomerModel = new CustomerModel(pRequest.body.customerid,pRequest.body.pickuplat, pRequest.body.pickuplng);
         
         try{
             // insert the order with empty driver
@@ -57,12 +57,14 @@ export class CustomerController{
             var driverList = await RedisService.getActiveDriverList();
             var nearest=999999;
             var chosenDriver:DriverModel;
+            Logging("Searching for driver..");
             for(let i in driverList){
                 var driverloc = driverList[i];
                 var driverlat = driverloc.split(',')[0];
                 var driverlng = driverloc.split(',')[1];
                 
                 var km = LocatorService.countDistance(customer.getLat(),customer.getLng(),driverlat,driverlng);
+                // Logging("current distance: "+km+", nearest: "+nearest);
                 if(km<nearest){
                     nearest=km;
                     chosenDriver=new DriverModel(i,driverlat,driverlng);
@@ -73,29 +75,36 @@ export class CustomerController{
                 pResponse.status(200).json({result:'No driver available at this moment'});
             }
             else{
-                chosenDriver.setStatus("ongoing");
-                RedisService.refreshDriverList(chosenDriver);
                 var params = {
                     'driverid':chosenDriver.getID()
                 };
                 let driverData:any = await DataAccessService.executeSP('driver_getdata',params,false);
-                var response={
-                    'driverid': chosenDriver.getID(),
-                    'name':driverData[0].first_name+' '+driverData[0].last_name,
-                    'phone':driverData[0].phone_number,
-                    'rating':driverData[0].rating,
-                    'plate_no':driverData[0].plate_no,
-                    'lat':chosenDriver.getLat(),
-                    'lng':chosenDriver.getLng()
-                };
-                
-                let driverParams={
-                    'orderid': orderResult.orderid,
-                    'driverid': chosenDriver.getID(),
-                    'plateno': driverData[0].plate_no
-                };
-                let result = await DataAccessService.executeSP('assign_driver',driverParams,false);
-                pResponse.status(200).json({result:response});
+                if(driverData!=null){
+                    var response={
+                        'driverid': chosenDriver.getID(),
+                        'name':driverData[0].first_name+' '+driverData[0].last_name,
+                        'phone':driverData[0].phone_number,
+                        'rating':driverData[0].rating,
+                        'plate_no':driverData[0].plate_no,
+                        'lat':chosenDriver.getLat(),
+                        'lng':chosenDriver.getLng()
+                    };
+                    
+                    let driverParams={
+                        'orderid': orderResult.orderid,
+                        'driverid': chosenDriver.getID(),
+                        'plateno': driverData[0].plate_no
+                    };
+                    let result = await DataAccessService.executeSP('assign_driver',driverParams,false);
+                    
+                    chosenDriver.setStatus("ongoing");
+                    RedisService.refreshDriverList(chosenDriver);
+
+                    pResponse.status(200).json({result:response});
+                }
+                else{
+                    ErrorHandlingService.throwHTTPErrorResponse(pResponse, 400, 4002, "Driver id is not found in DB");
+                }
             }
         }
         catch(err){
