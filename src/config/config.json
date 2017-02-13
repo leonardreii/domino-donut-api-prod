@@ -23,7 +23,7 @@
             "host"     : "localhost",
             "username" : "coba",
             "password" : "acn",
-            "name"     : "Test",
+            "name"     : "Sera",
             "port"     : 1433,
             "timezone" : "+07:00",
             "pool"     : {
@@ -61,13 +61,12 @@
             "key" : "@cnJak@rta"
         },
         "db" : {
-            "dialect"  : "postgres",
-            "host"     : "10.89.20.132",
-            "schema"   : "public",
-            "username" : "postgres",
-            "password" : "password123",
-            "name"     : "ewpdev_db",
-            "port"     : 2007,
+            "dialect"  : "mssql",
+            "host"     : "dev-scorpio-server.database.windows.net",
+            "username" : "super-admin",
+            "password" : "Mobility00",
+            "name"     : "dev-scorpio",
+            "port"     : 1433,
             "timezone" : "+07:00",
             "pool"     : {
                 "min"  : 0,
