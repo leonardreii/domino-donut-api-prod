@@ -19,13 +19,12 @@
             "key" : "@cnJak@rta"
         },
         "db" : {
-            "dialect"  : "postgres",
+            "dialect"  : "mssql",
             "host"     : "localhost",
-            "schema"   : "public",
-            "username" : "postgres",
-            "password" : "admin",
-            "name"     : "sera",
-            "port"     : 5432,
+            "username" : "coba",
+            "password" : "acn",
+            "name"     : "Test",
+            "port"     : 1433,
             "timezone" : "+07:00",
             "pool"     : {
                 "min"  : 0,
@@ -33,7 +32,7 @@
                 "idle" : 10000
             },
             "dialectOptions" : {
-                "ssl" : false
+                "encrypt" : false
             }
         },
         "redis" : {
@@ -76,7 +75,7 @@
                 "idle" : 10000
             },
             "dialectOptions" : {
-                "ssl" : false
+                "encrypt" : true
             }
         },
         "redis" : {

@@ -31,8 +31,8 @@ export class LoginController implements LoginControllerInterface {
                 ErrorHandlingService.throwHTTPErrorResponse(pResponse, 400, 1001, 'Invalid Login Parameters');
                 return;
             }
-            vResult = await DataAccessService.executeSP('login', vParam, true);
-            if(vResult === null){
+            vResult = await DataAccessService.executeSP('login', vParam);
+            if(vResult.length == 0){
                 ErrorHandlingService.throwHTTPErrorResponse(pResponse, 400, 1002, 'Invalid username or password');
                 return;
             }

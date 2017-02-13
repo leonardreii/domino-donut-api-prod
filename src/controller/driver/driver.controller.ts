@@ -55,7 +55,7 @@ export class DriverController{
             vData['psortby'] = pRequest.body.sortby;
             vData['psorttype'] = pRequest.body.sorttype;
 
-            let payload = await DataAccessService.executeSP('get_driverlistpaging',vData, true);
+            let payload = await DataAccessService.executeSP('get_driverlistpaging',vData);
             pResponse.status(200).send(payload);
         }
         catch (err) {
@@ -80,7 +80,7 @@ export class DriverController{
             var data = {
                 pdriverid : vDriverId
             };
-            let payload = await DataAccessService.executeSP('get_driverdetail',data, true);
+            let payload = await DataAccessService.executeSP('get_driverdetail',data);
             pResponse.status(200).send(payload);
         }
         catch (err) {

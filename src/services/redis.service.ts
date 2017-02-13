@@ -14,7 +14,6 @@ var vDate = new Date(vToday);
 
 export class RedisService {
 	public static client:any;
-	public static geo:any;
 	public static up = false;
 	public static errordesc = "Error while establishing connection with redis";
 	public static ACTIVE_DRIVER_LIST_NAME = "activedriverlist";
@@ -53,7 +52,6 @@ export class RedisService {
 				Logging("Redis is connected.");
 				RedisService.up=true;
 			});
-			RedisService.geo = require('georedis').initialize(RedisService.client);
 		}
 		catch(pErr){
 			Logging('Error while establishing database connection with redis : ' + pErr);

@@ -22,7 +22,7 @@ export class OrderController {
                 porderstatus : vOrderStatus
             };
 
-            let payload = await DataAccessService.executeSP('update_orderstatus',data, true);
+            let payload = await DataAccessService.executeSP('update_orderstatus',data);
             pResponse.status(200).send(payload);
         }
         catch (err) {

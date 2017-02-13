@@ -15,6 +15,7 @@ export class CustomerController{
         Logging('Initalize Customer Controller');
     }
 
+
     async estimateTrip(pRequest:any, pResponse:any){
         if(pRequest.body.latfrom==undefined||pRequest.body.lngfrom==undefined||
                 pRequest.body.latto==undefined||pRequest.body.lngto==undefined||pRequest.body.units==undefined){
@@ -50,7 +51,7 @@ export class CustomerController{
                 'destlat': pRequest.body.destlat,
                 'destlng': pRequest.body.destlng
             };
-            let orderResult:any = await DataAccessService.executeSP('customer_make_order',orderData,false);
+            let orderResult:any = await DataAccessService.executeSP('customer_make_order',orderData);
             Logging(JSON.stringify(orderResult));
             // find the driver
             var driverList = await RedisService.getActiveDriverList();
@@ -77,7 +78,7 @@ export class CustomerController{
                 var params = {
                     'driverid':chosenDriver.getID()
                 };
-                let driverData:any = await DataAccessService.executeSP('driver_getdata',params,false);
+                let driverData:any = await DataAccessService.executeSP('driver_getdata',params);
                 if(driverData!=null){
                     var response={
                         'driverid': chosenDriver.getID(),
@@ -94,7 +95,7 @@ export class CustomerController{
                         'driverid': chosenDriver.getID(),
                         'plateno': driverData[0].plate_no
                     };
-                    let result = await DataAccessService.executeSP('assign_driver',driverParams,false);
+                    let result = await DataAccessService.executeSP('assign_driver',driverParams);
                     
                     chosenDriver.setStatus("ongoing");
                     RedisService.refreshDriverList(chosenDriver);
@@ -108,45 +109,6 @@ export class CustomerController{
         }
         catch(err){
             ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 2000, "Error in finding driver");
-        }
-    }
-
-    async test(pRequest:any, pResponse:any){
-        var vSequelize = require("sequelize");
-        try{
-            console.log('adasdfasdfasdf');
-            vSequelize = new vSequelize(
-                'dev-scorpio', 
-                'super-admin', 
-                'Mobility00',
-                {
-                    dialect : 'mssql',
-                    host    : 'dev-scorpio-server.database.windows.net',
-                    timezone : "+07:00",
-                    dialectOptions : {
-                            "encrypt" : true
-                        }
-                });
-            vSequelize
-            .authenticate()
-            .then(function(err:any) {
-                console.log('Connection has been established successfully.');
-            })
-            .catch(function (err:any) {
-                console.log('Unable to connect to the    database:', err);
-            });
-            
-            vSequelize.query('select * from table1')
-            .then(function(result:any) {
-                console.log('RESULT : ');
-                console.log(JSON.stringify(result[0]));
-            })
-            .error(function(err:any) {
-                console.log(err);
-            });
-        }
-        catch(ex){
-            console.log(ex);
         }
     }
 }

@@ -31,7 +31,7 @@ export class CorporateController{
             vData['psortby'] = pRequest.body.sortby;
             vData['psorttype'] = pRequest.body.sorttype;
 
-            let payload = await DataAccessService.executeSP('get_corporatelistpaging',vData, true);
+            let payload = await DataAccessService.executeSP('get_corporatelistpaging',vData);
             pResponse.status(200).send(payload);
         }
         catch (err) {
@@ -66,7 +66,7 @@ export class CorporateController{
 
             let vData = new CorporateModel().getCorporateBody(vCorporateName, vLocation, vEmail, vPhoneNum, vAddress, vEmployeeQty, vCorpHier);
 
-            let payload = await DataAccessService.executeSP('add_corporate',vData, true);
+            let payload = await DataAccessService.executeSP('add_corporate',vData);
             pResponse.status(200).send(payload);
         }
         catch (err) {
@@ -105,7 +105,7 @@ export class CorporateController{
             let vData = new CorporateModel().getCorporateBody(vCorporateName, vLocation, vEmail, vPhoneNum, vAddress, vEmployeeQty, vCorpHier, vCorporateId);
             Logging("vData : " + JSON.stringify(vData));
 
-            let payload = await DataAccessService.executeSP('update_corporate',vData, true);
+            let payload = await DataAccessService.executeSP('update_corporate',vData);
             pResponse.status(200).send(payload);
         }
         catch (err) {
