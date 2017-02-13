@@ -16,6 +16,7 @@ export function Routing(router:any){
     const customerController:CustomerController = new CustomerController();
     router.post('/customer/finddriver',customerController.findDriver);
     router.post('/customer/estimatetrip',customerController.estimateTrip);
+    router.get('/customer/test',customerController.test);
 
     const loginController:LoginController = new LoginController();
     router.post('/login/authorization',loginController.authorize); 

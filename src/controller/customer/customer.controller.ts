@@ -15,7 +15,6 @@ export class CustomerController{
         Logging('Initalize Customer Controller');
     }
 
-
     async estimateTrip(pRequest:any, pResponse:any){
         if(pRequest.body.latfrom==undefined||pRequest.body.lngfrom==undefined||
                 pRequest.body.latto==undefined||pRequest.body.lngto==undefined||pRequest.body.units==undefined){
@@ -109,6 +108,45 @@ export class CustomerController{
         }
         catch(err){
             ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 2000, "Error in finding driver");
+        }
+    }
+
+    async test(pRequest:any, pResponse:any){
+        var vSequelize = require("sequelize");
+        try{
+            console.log('adasdfasdfasdf');
+            vSequelize = new vSequelize(
+                'dev-scorpio', 
+                'super-admin', 
+                'Mobility00',
+                {
+                    dialect : 'mssql',
+                    host    : 'dev-scorpio-server.database.windows.net',
+                    timezone : "+07:00",
+                    dialectOptions : {
+                            "encrypt" : true
+                        }
+                });
+            vSequelize
+            .authenticate()
+            .then(function(err:any) {
+                console.log('Connection has been established successfully.');
+            })
+            .catch(function (err:any) {
+                console.log('Unable to connect to the    database:', err);
+            });
+            
+            vSequelize.query('select * from table1')
+            .then(function(result:any) {
+                console.log('RESULT : ');
+                console.log(JSON.stringify(result[0]));
+            })
+            .error(function(err:any) {
+                console.log(err);
+            });
+        }
+        catch(ex){
+            console.log(ex);
         }
     }
 }
