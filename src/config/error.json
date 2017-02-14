@@ -16,5 +16,7 @@
     "3002" : "Driver is not exists",
     "_4000" : "General error (corporate)",
     "4001" : "Invalid parameters - Corporate",
-    "4002" : "Corporate name is already exists"
+    "4002" : "Corporate name is already exists",
+    "6001" : "Invalid parameters - User",
+    "7001" : "Location is not supported"
 }

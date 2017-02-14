@@ -20,10 +20,10 @@
         },
         "db" : {
             "dialect"  : "mssql",
-            "host"     : "localhost",
-            "username" : "coba",
-            "password" : "acn",
-            "name"     : "Test",
+            "host"     : "dev-scorpio-server.database.windows.net",
+            "username" : "super-admin",
+            "password" : "Mobility00",
+            "name"     : "dev-scorpio",
             "port"     : 1433,
             "timezone" : "+07:00",
             "pool"     : {
@@ -32,7 +32,7 @@
                 "idle" : 10000
             },
             "dialectOptions" : {
-                "encrypt" : false
+                "encrypt" : true
             }
         },
         "redis" : {
