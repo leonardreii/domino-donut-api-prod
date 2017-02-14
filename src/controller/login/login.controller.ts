@@ -39,10 +39,10 @@ export class LoginController implements LoginControllerInterface {
             else{
                 vResult = vResult[0];
                 vToken = new TokenModel();
-                vToken.setUserId(vResult.user_id);
+                vToken.setUserId(vResult.USER_ID);
                 pResponse.header('accessToken', Token.encryptToken(vToken));
                 pResponse.header('created', Date.now());
-                pResponse.status(200).send("Successfully login");
+                pResponse.status(200).json(vResult);
             }
         }
         catch (err) {
