@@ -80,8 +80,8 @@ export class DriverController{
             var data = {
                 pdriverid : vDriverId
             };
-            let payload = await DataAccessService.executeSP('get_driverdetail',data);
-            pResponse.status(200).send(payload);
+            let payload = await DataAccessService.executeSP('driver_getdetail',data);
+            pResponse.status(200).send(payload[0]);
         }
         catch (err) {
             Logging(err);

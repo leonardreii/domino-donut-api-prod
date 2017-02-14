@@ -10,11 +10,12 @@
     "1004" : "Suspended account",
     "_2000" : "General error (order)",
     "_2001" : "Invalid parameters - Order",
-    "2002" : "Order is not exists",
+    "52002" : "Order is not exists",
     "_3000" : "General error (order)",
     "3001" : "Invalid parameters - Driver",
-    "3002" : "Driver is not exists",
+    "53002" : "Driver is not exists",
     "_4000" : "General error (corporate)",
-    "4001" : "Invalid parameters - Corporate",
-    "4002" : "Corporate name is already exists"
+    "54001" : "Invalid parameters - Corporate",
+    "54002" : "Corporate name is already exists",
+    "54003" : "Corporate is not exists"
 }

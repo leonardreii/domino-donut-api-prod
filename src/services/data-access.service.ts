@@ -31,6 +31,7 @@ export class DataAccessService{
 						}
 					}
 					let vSQL:string = `EXEC ${pSPName} ${vParams}`;
+					Logging('vSQL : ' + vSQL);
 					SequelizeService.sequelize.query(vSQL, { type: SequelizeService.sequelize.QueryTypes.SELECT }).then(function(pResult:any){
 						let vResult:any = pResult;
 						if(vResult.length == 1 &&
