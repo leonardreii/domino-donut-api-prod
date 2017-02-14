@@ -1,4 +1,5 @@
 import { Logging } from './logging.service';
+import { ErrorHandlingService } from './error-handling.service';
 
 var request = require('request');
 
@@ -16,6 +17,9 @@ export class GoogleAPIService{
             Logging('Making request to: '+link);
             request(link, async function (error:any, response:any, body:any) {
                 body = JSON.parse(body);
+                if(!body.rows[0].elements[0].distance){
+                    ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 7001, "Location is not supported");
+                }
                 var distance = body.rows[0].elements[0].distance.value;
                 var duration = body.rows[0].elements[0].duration.value;
                 var tripEstimation={

@@ -5,7 +5,6 @@
     "704" : "Cannot access storage directory",
     "1000": "We have yet to granted you access to the Enterprise Portal. \n Please contact your Digi’s Account Manager for further assistance",
     "1001": "Invalid login parameters",
-    "1002": "User is not registered yet",
     "_1003": "General error (LOGIN)",
     "1004" : "Suspended account",
     "_2000" : "General error (order)",
@@ -17,5 +16,7 @@
     "_4000" : "General error (corporate)",
     "54001" : "Invalid parameters - Corporate",
     "54002" : "Corporate name is already exists",
-    "54003" : "Corporate is not exists"
+    "54003" : "Corporate is not exists",
+    "6001" : "Invalid parameters - User",
+    "7001" : "Location is not supported"
 }

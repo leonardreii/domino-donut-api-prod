@@ -14,6 +14,7 @@ export class DataAccessService{
 		return new Promise<string>(
 			function(pResolve, pReject) {
 				try{
+					Logging('Parsing the data');
 					let vParams:string = '';
 					let length:number;
 					let counter:number;
@@ -34,16 +35,16 @@ export class DataAccessService{
 					Logging('vSQL : ' + vSQL);
 					SequelizeService.sequelize.query(vSQL, { type: SequelizeService.sequelize.QueryTypes.SELECT }).then(function(pResult:any){
 						let vResult:any = pResult;
+						Logging('Result: '+vResult);
 						if(vResult.length == 1 &&
 						 ('ErrorNumber' in vResult[0]) &&
 						 ('ErrorMessage' in vResult[0])) {
 						 	vResult = vResult[0];
 							Logging('Error while executing query : ' + vSQL);
-							Logging('Result : ' + JSON.stringify(vResult));
 							ErrorHandlingService.throwPromiseError(pReject,vResult.ErrorNumber,vResult.ErrorMessage);
 						}else {
 						    Logging("success : ");
-							Logging(JSON.stringify(vResult));
+							Logging(vResult);
 							pResolve(vResult);
 						}
 					}).catch(function(pErr:any){
@@ -52,7 +53,9 @@ export class DataAccessService{
 						Logging('Error ' + pErr);
 						ErrorHandlingService.throwPromiseError(pReject,400, pErr);
 					});
-				}catch(pErr) {
+				}
+				catch(pErr) {
+					Logging(pErr);
 					ErrorHandlingService.throwPromiseError(pReject, 400,pErr);
 				}
 			}
