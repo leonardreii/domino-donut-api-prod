@@ -15,8 +15,8 @@ export class DriverController{
     async updateDriver(pRequest: any, pResponse: any){
         if(pRequest.body.driver_id==undefined||pRequest.body.lat==undefined||
            pRequest.body.lng==undefined||pRequest.body.status==undefined){
-                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 400, 3001, 'Invalid parameters - Driver');
-                return;
+            ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 3001, 'Invalid parameters - Driver');
+            return;
         }
         var driver:DriverModel = new DriverModel(pRequest.body.driver_id, pRequest.body.lat, pRequest.body.lng, pRequest.body.status);
         try{
@@ -30,7 +30,12 @@ export class DriverController{
             pResponse.status(200).json({result:'successful'});
         }
         catch(err){
-            ErrorHandlingService.throwHTTPErrorResponse(pResponse, 400, 2000, "Error updating driver data");
+            if (err.code){
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, err.code, err.desc);
+            }
+            else{
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 3000, "General error - Driver");
+            }
         }
     }
 
@@ -40,8 +45,8 @@ export class DriverController{
                 pRequest.body.row == undefined || pRequest.body.row == null ||
                 pRequest.body.sortby == undefined || pRequest.body.sortby == null ||
                 pRequest.body.sorttype == undefined || pRequest.body.sorttype == null) {
-                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 400, 3001, 'Invalid parameters - Driver');
-                return;
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 3001, 'Invalid parameters - Driver');
+            return;
             }
 
             var vFirstName = pRequest.body.firstname;
@@ -64,7 +69,12 @@ export class DriverController{
                 ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, err.code, err.desc);
             }
             else{
-                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 2000, 'General error : ' + err);
+                if (err.code){
+                    ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, err.code, err.desc);
+                }
+                else{
+                    ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 3000, "General error - Driver");
+                }
             }
         }
     }
@@ -73,7 +83,8 @@ export class DriverController{
         try {
             Logging("driverid : " + pRequest.params.driverid);
             if (pRequest.params.driverid == undefined || pRequest.params.driverid == null) {
-                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 400, 3001, 'Invalid parameters - Driver');
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 3001, 'Invalid parameters - Driver');
+            return;
             }
             var vDriverId = pRequest.params.driverid;
             var data = {
@@ -88,7 +99,12 @@ export class DriverController{
                 ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, err.code, err.desc);
             }
             else{
-                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 2000, 'General error : ' + err);
+                if (err.code){
+                    ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, err.code, err.desc);
+                }
+                else{
+                    ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 3000, "General error - Driver");
+                }
             }
         }
     }
@@ -108,7 +124,12 @@ export class DriverController{
             pResponse.status(200).json(result);
         }
         catch(err){
-            ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 2000, 'General error : ' + err);
+            if (err.code){
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, err.code, err.desc);
+            }
+            else{
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 3000, "General error - Driver");
+            }
         }
     }
 
@@ -118,7 +139,8 @@ export class DriverController{
                 pRequest.body.nik==undefined||pRequest.body.email==undefined||
                 pRequest.body.phone_number==undefined||pRequest.body.password==undefined||
                 pRequest.body.created_by==undefined){
-                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 400, 3001, 'Invalid parameters - Driver');
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 3001, 'Invalid parameters - Driver');
+                return;
             }
             var params={
                 first_name: pRequest.body.first_name==undefined? '' : pRequest.body.first_name,
@@ -133,7 +155,12 @@ export class DriverController{
             pResponse.status(200).json(result);
         }
         catch(err){
-            ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 2000, 'General error : ' + err);
+            if (err.code){
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, err.code, err.desc);
+            }
+            else{
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 3000, "General error - Driver");
+            }
         }
     }
 
@@ -144,7 +171,8 @@ export class DriverController{
                 pRequest.body.nik==undefined||pRequest.body.email==undefined||
                 pRequest.body.phone_number==undefined||pRequest.body.password==undefined||
                 pRequest.body.last_modified_by==undefined){
-                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 400, 3001, 'Invalid parameters - Driver');
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 3001, 'Invalid parameters - Driver');
+                return;
             }
             var params={
                 driver_id: pRequest.body.driver_id==undefined? '' : pRequest.body.driver_id,
@@ -160,14 +188,20 @@ export class DriverController{
             pResponse.status(200).json(result);
         }
         catch(err){
-            ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 2000, 'General error : ' + err);
+            if (err.code){
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, err.code, err.desc);
+            }
+            else{
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 3000, "General error - Driver");
+            }
         }
     }
 
     async deleteDriver(pRequest:any, pResponse:any){
         try{
             if(pRequest.body.driver_id==undefined){
-                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 400, 3001, 'Invalid parameters - Driver');
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 3001, 'Invalid parameters - Driver');
+                return;
             }
             var params={
                 driver_id: pRequest.body.driver_id
@@ -176,7 +210,12 @@ export class DriverController{
             pResponse.status(200).json(result);
         }
         catch(err){
-            ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 2000, 'General error : ' + err);
+            if (err.code){
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, err.code, err.desc);
+            }
+            else{
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 3000, "General error - Driver");
+            }
         }
     }
 }

@@ -7,19 +7,33 @@
     "1001": "Invalid login parameters",
     "_1003": "General error (LOGIN)",
     "1004" : "Suspended account",
+
     "_2000" : "General error (order)",
     "_2001" : "Invalid parameters - Order",
     "52002" : "Order is not exists",
+
+    "3000" : "General error - Driver",
     "3001" : "Invalid parameters - Driver",
     "53002" : "Driver is not exists",
     "53003" : "Invalid parameters - Unit Management",
     "53004" : "Car is not exists",
     "53005" : "Driver is still paired with another car",
     "53006" : "Car is still paired with another driver",
+
     "_4000" : "General error (corporate)",
     "54001" : "Invalid parameters - Corporate",
     "54002" : "Corporate name is already exists",
     "54003" : "Corporate is not exists",
-    "6001" : "Invalid parameters - User",
+
+    "5001" : "Invalid parameters - User",
+    "55002" : "Username already exist",
+    "55003" : "User is not exist",
+    "5000" : "General error - User",
+
+    "6001" : "Invalid parameter - Car",
+    "56002" : "Plate number already exist",
+    "56003" : "Car is not exist",
+    "6000" : "General error - Car",
+
     "7001" : "Location is not supported"
 }

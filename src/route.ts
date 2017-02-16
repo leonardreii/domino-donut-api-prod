@@ -4,8 +4,9 @@ import { CustomerController } from './controller/customer/customer.controller';
 import { OrderController } from './controller/order/order.controller';
 import { CorporateController } from './controller/corporate/corporate.controller';
 import { UserController } from './controller/user/user.controller';
+import { CarController } from './controller/car/car.controller';
 import { LoginController } from './controller/login/login.controller';
-import { CarController } from './controller/car/car.controller'
+
 
 export function Routing(router:any){
     const tokenService: Token = new Token();
@@ -23,6 +24,13 @@ export function Routing(router:any){
     router.post('/customer/finddriver',customerController.findDriver);
     router.post('/customer/estimatetrip',customerController.estimateTrip);
     router.post('/customer/history',customerController.getHistory);
+    router.post('/customer/getdetails',customerController.getDetails);
+
+    const carController:CarController = new CarController();
+    router.post('/car/add',carController.addCar);
+    router.post('/car/edit',carController.editCar);
+    router.post('/car/carlist',carController.getCar);
+    router.post('/car/driverpairing',carController.pairCarDriver);
 
     const loginController:LoginController = new LoginController();
     router.post('/login/authorization',loginController.authorize); 
@@ -32,15 +40,10 @@ export function Routing(router:any){
     router.put('/order/driverrating',orderCtrl.setDriverRating);
 
     const corporateCtrl:CorporateController = new CorporateController();
-    router.get('/corporate/test',corporateCtrl.test);
     router.post('/corporate/getcorporatelist',corporateCtrl.getCorporateList);
     router.post('/corporate/corporate',corporateCtrl.addCorporate);
     router.put('/corporate/corporate',corporateCtrl.updateCorporate);
-
-    const carCtrl:CarController = new CarController();
-    router.post('/car/carlist',carCtrl.getCar);
-    router.post('/car/driverpairing',carCtrl.pairCarDriver);
-
+    
     const userCtrl:UserController = new UserController();
     router.post('/user/getdata',userCtrl.getUser);
     router.post('/user/add',userCtrl.addUser);
