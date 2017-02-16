@@ -35,4 +35,34 @@ export class OrderController {
             }
         }
     }
+
+    async setDriverRating(pRequest:any, pResponse:any) {
+        try {
+            if (pRequest.body.orderid == undefined || pRequest.body.orderid == '' ||
+                pRequest.body.driverrating == undefined || pRequest.body.driverrating == '') {
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 400, 2001, 'Invalid parameters - Order');
+                return;
+            }
+
+            var vOrderId = pRequest.body.orderid;
+            var vdriverrating = pRequest.body.driverrating;
+
+            let vParam = {
+                porderid : vOrderId,
+                pdriverrating : vdriverrating
+            };
+
+            let payload:any = await DataAccessService.executeSP('order_set_driverrating',vParam);
+
+            pResponse.status(200).send(payload[0].result);
+        }
+        catch (err) {
+            if (err.code){
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, err.code, err.desc);
+            }
+            else{
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 2000, 'General error : ' + err);
+            }
+        }
+    }
 }

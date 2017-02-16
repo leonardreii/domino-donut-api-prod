@@ -29,6 +29,7 @@ export function Routing(router:any){
 
     const orderCtrl:OrderController = new OrderController();
     router.put('/order/cancelorder',orderCtrl.cancelOrder);
+    router.put('/order/driverrating',orderCtrl.setDriverRating);
 
     const corporateCtrl:CorporateController = new CorporateController();
     router.get('/corporate/test',corporateCtrl.test);
@@ -38,6 +39,7 @@ export function Routing(router:any){
 
     const carCtrl:CarController = new CarController();
     router.post('/car/carlist',carCtrl.getCar);
+    router.post('/car/driverpairing',carCtrl.pairCarDriver);
 
     const userCtrl:UserController = new UserController();
     router.post('/user/getdata',userCtrl.getUser);
