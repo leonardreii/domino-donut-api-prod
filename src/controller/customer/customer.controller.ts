@@ -15,9 +15,8 @@ export class CustomerController{
         Logging('Initalize Customer Controller');
     }
 
-
     async estimateTrip(pRequest:any, pResponse:any){
-        if(pRequest.body.latfrom==undefined||pRequest.body.lngfrom==undefined||
+        if(pRequest.body.latfrom==undefined||pRequest.body.slngfrom==undefined||
                 pRequest.body.latto==undefined||pRequest.body.lngto==undefined||pRequest.body.units==undefined){
             ErrorHandlingService.throwHTTPErrorResponse(pResponse, 400, 100, "Invalid Parameter");
             return;      
@@ -100,7 +99,7 @@ export class CustomerController{
                     chosenDriver.setStatus("ongoing");
                     RedisService.refreshDriverList(chosenDriver);
 
-                    pResponse.status(200).json({result:response});
+                    pResponse.status(200).json(response);
                 }
                 else{
                     ErrorHandlingService.throwHTTPErrorResponse(pResponse, 400, 4002, "Driver id is not found in DB");
@@ -112,14 +111,30 @@ export class CustomerController{
         }
     }
 
+    async getDetails(pRequest:any, pResponse:any){
+        try{
+            if(pRequest.body.employee_id==undefined){
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 400, 100, "Invalid Parameter - Customer");
+                return;
+            }
+            var params={
+                employee_id: pRequest.body.employee_id
+            };
+            let result:any = await DataAccessService.executeSP('employee_getdetails',params);
+            pResponse.status(200).json(result);
+        }
+        catch(err){
+            ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 2008, "Error in  retrieving details data");
+        }
+    }
     async getUser(pRequest:any, pResponse:any){
         try{
             var params={
                 username: pRequest.body.username,
                 role_id: pRequest.body.roleid
             };
-            let result = await DataAccessService.executeSP('user_get',params);
-            Logging(result);
+            let result:any = await DataAccessService.executeSP('user_get',params);
+            pResponse.status(200).json(result);
         }
         catch(err){
             ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 2004, "Error in retreiving user data");
@@ -130,11 +145,12 @@ export class CustomerController{
         try{
             if(pRequest.body.employee_id==undefined){
                 ErrorHandlingService.throwHTTPErrorResponse(pResponse, 400, 100, "Invalid Parameter");
+                return;
             }
             var params={
                 employee_id: pRequest.body.employee_id
             };
-            let result = await DataAccessService.executeSP('customer_history',params);
+            let result:any = await DataAccessService.executeSP('customer_history',params);
             pResponse.status(200).json(result);
         }
         catch(err){
