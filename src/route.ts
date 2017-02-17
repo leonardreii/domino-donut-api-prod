@@ -33,7 +33,9 @@ export function Routing(router:any){
     router.post('/car/driverpairing',carController.pairCarDriver);
 
     const loginController:LoginController = new LoginController();
-    router.post('/login/authorization',loginController.authorize); 
+    router.post('/driver/login',loginController.authorize_driver);
+    router.post('/customer/login',loginController.authorize_employee);
+    router.post('/corporate/login',loginController.authorize_web); 
 
     const orderCtrl:OrderController = new OrderController();
     router.put('/order/cancelorder',orderCtrl.cancelOrder);
