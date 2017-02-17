@@ -20,10 +20,10 @@
         },
         "db" : {
             "dialect"  : "mssql",
-            "host"     : "localhost",
-            "username" : "coba",
-            "password" : "acn",
-            "name"     : "Sera",
+            "host"     : "dev-scorpio-server.database.windows.net",
+            "username" : "super-admin",
+            "password" : "Mobility00",
+            "name"     : "dev-scorpio",
             "port"     : 1433,
             "timezone" : "+07:00",
             "pool"     : {
@@ -32,7 +32,7 @@
                 "idle" : 10000
             },
             "dialectOptions" : {
-                "encrypt" : false
+                "encrypt" : true
             }
         },
         "redis" : {
@@ -50,9 +50,9 @@
             "http://10.89.20.136:3001",
             "http://10.89.20.136:3003"
         ],
-        "encryption" : true,
+        "encryption" : false,
         "encryption_key" : "01234567890qwertyuiopasdfghjklzxcvbnm",
-        "port" : 2013,
+        "port" : 4000,
         "debug" : true,
         "http" : {
             "timeout" : 15000
@@ -79,8 +79,8 @@
         },
         "redis" : {
             "redisConfig": {
-                "host" : "127.0.0.2",
-                "port" : "2014"
+                "host" : "localhost",
+                "port" : "6379"
             }
         }
     }

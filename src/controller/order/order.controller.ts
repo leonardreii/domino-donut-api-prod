@@ -7,26 +7,56 @@ export class OrderController {
         Logging('Initalize Order Controller');
     }
 
-    async updateOrderStatus(pRequest: any, pResponse: any){
+    async cancelOrder(pRequest: any, pResponse: any){
         try {
-            if (pRequest.body.orderid == undefined || pRequest.body.orderid == null ||
-                pRequest.body.orderstatus == undefined || pRequest.body.orderstatus == null) {
+            if (pRequest.body.orderid == undefined || pRequest.body.orderid == '' ||
+                pRequest.body.modifiedby == undefined || pRequest.body.modifiedby == '') {
                 ErrorHandlingService.throwHTTPErrorResponse(pResponse, 400, 2001, 'Invalid parameters - Order');
                 return;
             }
             var vOrderId = pRequest.body.orderid;
-            var vOrderStatus = pRequest.body.orderstatus;
+            var vModifiedBy = pRequest.body.modifiedby;
 
             var data = {
                 porderid : vOrderId,
-                porderstatus : vOrderStatus
+                pmodifiedby : vModifiedBy
             };
 
-            let payload = await DataAccessService.executeSP('update_orderstatus',data);
-            pResponse.status(200).send(payload);
+            let payload:any = await DataAccessService.executeSP('order_cancel',data);
+            pResponse.status(200).send(payload[0].result);
         }
         catch (err) {
             Logging(err);
+            if (err.code){
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, err.code, err.desc);
+            }
+            else{
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 2000, 'General error : ' + err);
+            }
+        }
+    }
+
+    async setDriverRating(pRequest:any, pResponse:any) {
+        try {
+            if (pRequest.body.orderid == undefined || pRequest.body.orderid == '' ||
+                pRequest.body.driverrating == undefined || pRequest.body.driverrating == '') {
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 400, 2001, 'Invalid parameters - Order');
+                return;
+            }
+
+            var vOrderId = pRequest.body.orderid;
+            var vdriverrating = pRequest.body.driverrating;
+
+            let vParam = {
+                porderid : vOrderId,
+                pdriverrating : vdriverrating
+            };
+
+            let payload:any = await DataAccessService.executeSP('order_set_driverrating',vParam);
+
+            pResponse.status(200).send(payload[0].result);
+        }
+        catch (err) {
             if (err.code){
                 ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, err.code, err.desc);
             }
