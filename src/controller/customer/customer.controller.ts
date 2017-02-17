@@ -121,7 +121,7 @@ export class CustomerController{
                 employee_id: pRequest.body.employee_id
             };
             let result:any = await DataAccessService.executeSP('employee_getdetails',params);
-            pResponse.status(200).json(result);
+            pResponse.status(200).json(result[0]);
         }
         catch(err){
             ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 2008, "Error in  retrieving details data");
