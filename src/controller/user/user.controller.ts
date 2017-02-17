@@ -12,26 +12,37 @@ export class UserController{
     async getUser(pRequest:any, pResponse:any){
         try{
             var params={
-                username: pRequest.body.username==undefined? '' : pRequest.body.username,
-                role_id: pRequest.body.roleid==undefined? '' : pRequest.boody.roledy
+                first_name: pRequest.body.first_name==undefined? '' : pRequest.body.first_name,
+                last_name: pRequest.body.last_name==undefined? '' : pRequest.body.last_name,
+                email: pRequest.body.email==undefined? '' : pRequest.body.email,
+                role_id: pRequest.body.role_id==undefined? '' : pRequest.body.role_id
             };
-            let result = await DataAccessService.executeSP('user_get',params);
+            Logging('aaa');
+            let result:any = await DataAccessService.executeSP('user_get',params);
             pResponse.status(200).json(result);
         }
         catch(err){
-            ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 5000, "General error - User");
+            if (err.code){
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, err.code, err.desc);
+            }
+            else{
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 5000, "General error - User");
+            }
         }
     }
 
     async addUser(pRequest:any, pResponse:any){
         try{
-            if(pRequest.body.username==undefined||pRequest.body.password==undefined||
+            if(pRequest.body.first_name==undefined||pRequest.body.last_name==undefined||
+                pRequest.body.email==undefined||pRequest.body.password==undefined||
                 pRequest.body.role_id==undefined||pRequest.body.created_by==undefined){
                 ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 5001, "Invalid parameters - User");
                 return;
             }
             var params={
-                username: pRequest.body.username,
+                first_name: pRequest.body.first_name,
+                last_name: pRequest.body.last_name,
+                email: pRequest.body.email,
                 password: pRequest.body.password,
                 role_id: pRequest.body.role_id,
                 created_by: pRequest.body.created_by
@@ -52,14 +63,17 @@ export class UserController{
     async editUser(pRequest:any, pResponse:any){
         try{
             if(pRequest.body.user_id==undefined||
-                pRequest.body.username==undefined||pRequest.body.password==undefined||
+                pRequest.body.first_name==undefined||pRequest.body.last_name==undefined||
+                pRequest.body.email==undefined||pRequest.body.password==undefined||
                 pRequest.body.role_id==undefined||pRequest.body.last_modified_by==undefined){
                 ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 5001, "Invalid parameters - User");
                 return;
             }
             var params={
                 user_id: pRequest.body.user_id,
-                username: pRequest.body.username,
+                first_name: pRequest.body.first_name,
+                last_name: pRequest.body.last_name,
+                email: pRequest.body.email,
                 password: pRequest.body.password,
                 role_id: pRequest.body.role_id,
                 last_modified_by: pRequest.body.last_modified_by
