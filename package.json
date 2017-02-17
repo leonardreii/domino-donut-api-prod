@@ -12,6 +12,7 @@
     "class-validator": "0.3.2",
     "crypto-js": "^3.1.9-1",
     "express": "^4.14.0",
+    "http": "0.0.0",
     "ioredis": "^2.5.0",
     "moment": "^2.17.1",
     "njwt": "^0.2.3",
@@ -19,6 +20,7 @@
     "pg": "^6.1.2",
     "request": "^2.79.0",
     "sequelize": "^3.30.0",
+    "socket.io": "^1.7.2",
     "tedious": "^1.14.0",
     "uuid": "^3.0.1",
     "validator": "^6.2.1"
