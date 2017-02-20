@@ -6,6 +6,7 @@ import { CorporateController } from './controller/corporate/corporate.controller
 import { UserController } from './controller/user/user.controller';
 import { CarController } from './controller/car/car.controller';
 import { LoginController } from './controller/login/login.controller';
+import { OtherController } from './controller/other/city.controller';
 
 
 export function Routing(router:any){
@@ -13,6 +14,7 @@ export function Routing(router:any){
 
     const driverController:DriverController = new DriverController();
     router.post('/driver/updatedriver',driverController.updateDriver);
+    router.put('/driver/socketid',tokenService.verifyToken,driverController.updateSocket);
     router.get('/driver/driverdetail/:driverid',driverController.getDriverDetails);
     router.post('/driver/getdriverlist',driverController.getDriverListPaging);
     router.post('/driver/getdata',driverController.getData);
@@ -21,10 +23,12 @@ export function Routing(router:any){
     router.post('/driver/delete',driverController.deleteDriver);
 
     const customerController:CustomerController = new CustomerController();
-    router.post('/customer/finddriver',customerController.findDriver);
+    router.put('/customer/socketid',tokenService.verifyToken,customerController.updateSocket);
+    router.post('/customer/finddriver',tokenService.verifyToken,customerController.findDriver);
     router.post('/customer/estimatetrip',customerController.estimateTrip);
     router.post('/customer/history',customerController.getHistory);
     router.post('/customer/getdetails',customerController.getDetails);
+    router.post('/customer/getemployeelist',customerController.getEmployeeList);
 
     const carController:CarController = new CarController();
     router.post('/car/add',carController.addCar);
@@ -43,6 +47,7 @@ export function Routing(router:any){
 
     const corporateCtrl:CorporateController = new CorporateController();
     router.post('/corporate/getcorporatelist',corporateCtrl.getCorporateList);
+    router.get('/corporate/detail/:corporateid',corporateCtrl.getCorporateDetail);
     router.post('/corporate/corporate',corporateCtrl.addCorporate);
     router.put('/corporate/corporate',corporateCtrl.updateCorporate);
     
@@ -51,4 +56,7 @@ export function Routing(router:any){
     router.post('/user/add',userCtrl.addUser);
     router.post('/user/edit',userCtrl.editUser);
     router.post('/user/delete',userCtrl.deleteuser);
+
+    const otherCtrl:OtherController = new OtherController();
+    router.get('/other/citylist',otherCtrl.getCityList);
 }

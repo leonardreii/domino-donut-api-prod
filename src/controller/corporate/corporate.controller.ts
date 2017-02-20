@@ -9,14 +9,20 @@ export class CorporateController{
         Logging('Initialize Corporate Controller');
     }
 
-    async test(pRequest:any, pResponse:any) {
+    async getCorporateDetail(pRequest:any, pResponse:any) {
         try {
-            let vParam = {
-                par1 : 'param1'
-            };
-            let payload = await DataAccessService.executeSP('get_car',undefined);
+            if (pRequest.params.corporateid == undefined || pRequest.params.corporateid == '') {
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 400, 54001, 'Invalid parameters - Corporate');
+                return;
+            }
 
-            pResponse.status(200).send(payload);
+            let vData = {
+                pcorporateid : pRequest.params.corporateid
+            };
+
+            let payload = await DataAccessService.executeSP('corporate_getdetail',vData);
+
+            pResponse.status(200).send(payload[0]);
         }
         catch (err) {
             if (err.code){

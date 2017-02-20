@@ -3,13 +3,41 @@ import {ErrorHandlingService} from '../../services/error-handling.service';
 import { RedisService } from './../../services/redis.service';
 import { DataAccessService } from './../../services/data-access.service';
 import { DriverModel } from './../../model/driver.model';
-
+import { TokenModel } from './../../model/token.model';
 //var request = require('request');
 var APIKEY = 'AIzaSyCaRXsdUpgSOffOmuLRiV73OruPL347Bc4';
+
+interface Socket{
+    driver_id:string;
+    socketid:string;
+}
 
 export class DriverController{
     constructor(){
         Logging('Initialize Driver Controller');
+    }
+
+    async updateSocket(pRequest: any, pResponse: any){
+        try{
+            let vTokenObject: TokenModel = pResponse.locals.token;
+            let vParam:Socket=pRequest.body;
+            let vResult:any;
+            if (vParam.socketid == undefined || vParam.socketid == null || vParam.socketid == ""){
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 3001, 'Invalid parameters - Driver');
+                return;
+            }
+            vParam.driver_id = vTokenObject.getId();
+            vResult = await DataAccessService.executeSP('update_socketid_driver', vParam);
+            pResponse.status(200).send("Successfully update");
+        }
+        catch(err){
+            if (err.code){
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, err.code, err.desc);
+            }
+            else{
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 3000, "General error - Driver");
+            }
+        }
     }
 
     async updateDriver(pRequest: any, pResponse: any){

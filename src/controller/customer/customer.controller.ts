@@ -6,13 +6,42 @@ import { GoogleAPIService } from './../../services/googleapi.service';
 import { DataAccessService } from './../../services/data-access.service';
 import { CustomerModel } from './../../model/customer.model';
 import { DriverModel } from './../../model/driver.model';
+import { TokenModel } from './../../model/token.model';
+import { WebSocketService } from './../../services/websocket.service';
 
 var request = require('request');
 var APIKEY = 'AIzaSyCaRXsdUpgSOffOmuLRiV73OruPL347Bc4';
+interface Socket{
+    employee_id:string;
+    socketid:string;
+}
 
 export class CustomerController{
     constructor(){
         Logging('Initalize Customer Controller');
+    }
+
+    async updateSocket(pRequest: any, pResponse: any){
+        try{
+            let vTokenObject: TokenModel = pResponse.locals.token;
+            let vParam:Socket=pRequest.body;
+            let vResult:any;
+            if (vParam.socketid == undefined || vParam.socketid == null || vParam.socketid == ""){
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 100, 'Invalid parameter');
+                return;
+            }
+            vParam.employee_id = vTokenObject.getId();
+            vResult = await DataAccessService.executeSP('update_socketid_employee', vParam);
+            pResponse.status(200).send("Successfully update");
+        }
+        catch(err){
+            if (err.code){
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, err.code, err.desc);
+            }
+            else{
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 3000, "General error - Driver");
+            }
+        }
     }
 
     async estimateTrip(pRequest:any, pResponse:any){
@@ -41,6 +70,7 @@ export class CustomerController{
         
         try{
             // insert the order with empty driver
+            let vTokenObject: TokenModel = pResponse.locals.token;
             var orderData={
                 employee_id: pRequest.body.employee_id,
                 pickup_location: pRequest.body.pickuploc,
@@ -103,7 +133,11 @@ export class CustomerController{
                         plate_no: driverData[0].plate_no
                     };
                     let result = await DataAccessService.executeSP('order_assign_driver',driverParams);
-
+                    let vParams={
+                        employee_id: vTokenObject.getId()
+                    };
+                    result = await DataAccessService.executeSP('employee_getdetails',vParams);
+                    WebSocketService.sockets[driverData[0].socket_id].emit('incomingOrder', result[0]);
                     pResponse.status(200).json(response);
                 }
                 else{
@@ -117,6 +151,35 @@ export class CustomerController{
             }
             else{
                 ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 2000, "Error in finding driver");
+            }
+        }
+    }
+
+    async getEmployeeList(pRequest: any, pResponse: any){
+        try {
+            var vEmployeeName = (pRequest.body.employeename == undefined) ? '' : pRequest.body.employeename;
+            var vNIK = (pRequest.body.nik == undefined) ? '' : pRequest.body.nik;
+            var vEmail = (pRequest.body.email == undefined) ? '' : pRequest.body.email;
+            var vPhoneNum = (pRequest.body.phone == undefined) ? '' : pRequest.body.phone;
+            var vCorporateName = (pRequest.body.corporatename == undefined) ? '' : pRequest.body.corporatename;
+            
+            let vData = {
+                pname : vEmployeeName,
+                pnik : vNIK,
+                pemail : vEmail,
+                pphonenumber : vPhoneNum,
+                pcorporatename : vCorporateName
+            };
+
+            let payload = await DataAccessService.executeSP('employee_get',vData);
+            pResponse.status(200).send(payload);
+        }
+        catch (err) {
+            if (err.code){
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, err.code, err.desc);
+            }
+            else{
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 5000, 'General error : ' + err);
             }
         }
     }

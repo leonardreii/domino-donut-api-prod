@@ -4,6 +4,7 @@ import {DataAccessService} from '../../services/data-access.service';
 import {TokenModel} from '../../model/token.model';
 import {Token} from '../../services/token.service';
 import {RedisService} from '../../services/redis.service';
+import {WebSocketService} from '../../services/websocket.service';
 declare var require:any;
 
 var vEnv = require('../../config/mode.json')['mode'];
@@ -41,7 +42,7 @@ export class LoginController implements LoginControllerInterface {
             else{
                 vResult = vResult[0];
                 vToken = new TokenModel();
-                vToken.setUserId(vResult.USER_ID);
+                vToken.setId(vResult.USER_ID);
                 pResponse.header('accessToken', Token.encryptToken(vToken));
                 pResponse.header('created', Date.now());
                 pResponse.status(200).json(vResult);
@@ -74,7 +75,7 @@ export class LoginController implements LoginControllerInterface {
             else{
                 vResult = vResult[0];
                 vToken = new TokenModel();
-                vToken.setUserId(vResult.USER_ID);
+                vToken.setId(vResult.DRIVER_ID);
                 pResponse.header('accessToken', Token.encryptToken(vToken));
                 pResponse.header('created', Date.now());
                 pResponse.status(200).json(vResult);
@@ -89,7 +90,7 @@ export class LoginController implements LoginControllerInterface {
         }
     }
     async authorize_employee(pRequest: any, pResponse: any): Promise<void> {
-        Logging('calling authorize controller');
+        Logging('calling authorize controller : '+WebSocketService.sockets.what);
         try {
             let vParam:loginData = pRequest.body; 
             let vResult:any;
@@ -107,7 +108,7 @@ export class LoginController implements LoginControllerInterface {
             else{
                 vResult = vResult[0];
                 vToken = new TokenModel();
-                vToken.setUserId(vResult.USER_ID);
+                vToken.setId(vResult.EMPLOYEE_ID);
                 pResponse.header('accessToken', Token.encryptToken(vToken));
                 pResponse.header('created', Date.now());
                 pResponse.status(200).json(vResult);
