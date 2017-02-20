@@ -7,6 +7,7 @@ import { DataAccessService } from './../../services/data-access.service';
 import { CustomerModel } from './../../model/customer.model';
 import { DriverModel } from './../../model/driver.model';
 import { TokenModel } from './../../model/token.model';
+import { WebSocketService } from './../../services/websocket.service';
 
 var request = require('request');
 var APIKEY = 'AIzaSyCaRXsdUpgSOffOmuLRiV73OruPL347Bc4';
@@ -69,6 +70,7 @@ export class CustomerController{
         
         try{
             // insert the order with empty driver
+            let vTokenObject: TokenModel = pResponse.locals.token;
             var orderData={
                 employee_id: pRequest.body.employee_id,
                 pickup_location: pRequest.body.pickuploc,
@@ -126,7 +128,11 @@ export class CustomerController{
                         plate_no: driverData[0].plate_no
                     };
                     let result = await DataAccessService.executeSP('order_assign_driver',driverParams);
-
+                    let vParams={
+                        employee_id: vTokenObject.getId()
+                    };
+                    result = await DataAccessService.executeSP('employee_getdetails',vParams);
+                    WebSocketService.sockets[driverData[0].socket_id].emit('incomingOrder', result[0]);
                     pResponse.status(200).json(response);
                 }
                 else{
