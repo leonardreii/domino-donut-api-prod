@@ -41,6 +41,7 @@ export function Routing(router:any){
 
     const corporateCtrl:CorporateController = new CorporateController();
     router.post('/corporate/getcorporatelist',corporateCtrl.getCorporateList);
+    router.get('/corporate/detail/:corporateid',corporateCtrl.getCorporateDetail);
     router.post('/corporate/corporate',corporateCtrl.addCorporate);
     router.put('/corporate/corporate',corporateCtrl.updateCorporate);
     
