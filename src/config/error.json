@@ -26,7 +26,7 @@
     "54003" : "Corporate is not exists",
 
     "5001" : "Invalid parameters - User",
-    "55002" : "Username already exist",
+    "55002" : "User email already exist",
     "55003" : "User is not exist",
     "5000" : "General error - User",
 
