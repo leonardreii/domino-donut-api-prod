@@ -144,6 +144,35 @@ export class CustomerController{
         }
     }
 
+    async getEmployeeList(pRequest: any, pResponse: any){
+        try {
+            var vEmployeeName = (pRequest.body.employeename == undefined) ? '' : pRequest.body.employeename;
+            var vNIK = (pRequest.body.nik == undefined) ? '' : pRequest.body.nik;
+            var vEmail = (pRequest.body.email == undefined) ? '' : pRequest.body.email;
+            var vPhoneNum = (pRequest.body.phone == undefined) ? '' : pRequest.body.phone;
+            var vCorporateName = (pRequest.body.corporatename == undefined) ? '' : pRequest.body.corporatename;
+            
+            let vData = {
+                pname : vEmployeeName,
+                pnik : vNIK,
+                pemail : vEmail,
+                pphonenumber : vPhoneNum,
+                pcorporatename : vCorporateName
+            };
+
+            let payload = await DataAccessService.executeSP('employee_get',vData);
+            pResponse.status(200).send(payload);
+        }
+        catch (err) {
+            if (err.code){
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, err.code, err.desc);
+            }
+            else{
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 5000, 'General error : ' + err);
+            }
+        }
+    }
+
     async getDetails(pRequest:any, pResponse:any){
         try{
             if(pRequest.body.employee_id==undefined){

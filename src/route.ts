@@ -6,6 +6,7 @@ import { CorporateController } from './controller/corporate/corporate.controller
 import { UserController } from './controller/user/user.controller';
 import { CarController } from './controller/car/car.controller';
 import { LoginController } from './controller/login/login.controller';
+import { OtherController } from './controller/other/city.controller';
 
 
 export function Routing(router:any){
@@ -27,6 +28,7 @@ export function Routing(router:any){
     router.post('/customer/estimatetrip',customerController.estimateTrip);
     router.post('/customer/history',customerController.getHistory);
     router.post('/customer/getdetails',customerController.getDetails);
+    router.post('/customer/getemployeelist',customerController.getEmployeeList);
 
     const carController:CarController = new CarController();
     router.post('/car/add',carController.addCar);
@@ -54,4 +56,7 @@ export function Routing(router:any){
     router.post('/user/add',userCtrl.addUser);
     router.post('/user/edit',userCtrl.editUser);
     router.post('/user/delete',userCtrl.deleteuser);
+
+    const otherCtrl:OtherController = new OtherController();
+    router.get('/other/citylist',otherCtrl.getCityList);
 }
