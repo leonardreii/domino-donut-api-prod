@@ -35,7 +35,7 @@ export class Token  {
 			let vSigningkey = vConfig.token.key;
 			let vVerifiedJwt = vNJwt.verify(pToken,vSigningkey).body;
 			let vTokenObject = new TokenModel();
-			vTokenObject.setUserId(vVerifiedJwt.userId);
+			vTokenObject.setId(vVerifiedJwt.id);
 			return vTokenObject;
 		}catch(pErr){
 			ErrorHandlingService.throwError(300, 'Invalid Access Token');

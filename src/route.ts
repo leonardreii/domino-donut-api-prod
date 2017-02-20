@@ -13,6 +13,7 @@ export function Routing(router:any){
 
     const driverController:DriverController = new DriverController();
     router.post('/driver/updatedriver',driverController.updateDriver);
+    router.put('/driver/socketid',tokenService.verifyToken,driverController.updateSocket);
     router.get('/driver/driverdetail/:driverid',driverController.getDriverDetails);
     router.post('/driver/getdriverlist',driverController.getDriverListPaging);
     router.post('/driver/getdata',driverController.getData);
@@ -21,6 +22,7 @@ export function Routing(router:any){
     router.post('/driver/delete',driverController.deleteDriver);
 
     const customerController:CustomerController = new CustomerController();
+    router.put('/customer/socketid',tokenService.verifyToken,customerController.updateSocket);
     router.post('/customer/finddriver',customerController.findDriver);
     router.post('/customer/estimatetrip',customerController.estimateTrip);
     router.post('/customer/history',customerController.getHistory);

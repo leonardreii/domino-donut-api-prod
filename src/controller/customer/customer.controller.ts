@@ -6,13 +6,41 @@ import { GoogleAPIService } from './../../services/googleapi.service';
 import { DataAccessService } from './../../services/data-access.service';
 import { CustomerModel } from './../../model/customer.model';
 import { DriverModel } from './../../model/driver.model';
+import { TokenModel } from './../../model/token.model';
 
 var request = require('request');
 var APIKEY = 'AIzaSyCaRXsdUpgSOffOmuLRiV73OruPL347Bc4';
+interface Socket{
+    employee_id:string;
+    socketid:string;
+}
 
 export class CustomerController{
     constructor(){
         Logging('Initalize Customer Controller');
+    }
+
+    async updateSocket(pRequest: any, pResponse: any){
+        try{
+            let vTokenObject: TokenModel = pResponse.locals.token;
+            let vParam:Socket=pRequest.body;
+            let vResult:any;
+            if (vParam.socketid == undefined || vParam.socketid == null || vParam.socketid == ""){
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 100, 'Invalid parameter');
+                return;
+            }
+            vParam.employee_id = vTokenObject.getId();
+            vResult = await DataAccessService.executeSP('update_socketid_employee', vParam);
+            pResponse.status(200).send("Successfully update");
+        }
+        catch(err){
+            if (err.code){
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, err.code, err.desc);
+            }
+            else{
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 3000, "General error - Driver");
+            }
+        }
     }
 
     async estimateTrip(pRequest:any, pResponse:any){
