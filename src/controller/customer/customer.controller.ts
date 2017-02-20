@@ -16,7 +16,7 @@ export class CustomerController{
     }
 
     async estimateTrip(pRequest:any, pResponse:any){
-        if(pRequest.body.latfrom==undefined||pRequest.body.slngfrom==undefined||
+        if(pRequest.body.latfrom==undefined||pRequest.body.lngfrom==undefined||
                 pRequest.body.latto==undefined||pRequest.body.lngto==undefined||pRequest.body.units==undefined){
             ErrorHandlingService.throwHTTPErrorResponse(pResponse, 400, 100, "Invalid Parameter");
             return;      
@@ -71,12 +71,17 @@ export class CustomerController{
             }
 
             if(nearest==999999){
+                var param={
+                    order_id: orderResult[0].order_id,
+                    order_status: "NOTFOUND"
+                };
+                let result = await DataAccessService.executeSP('order_updatestatus',param);
                 pResponse.status(200).json({result:'No driver available at this moment'});
             }
             else{
                 chosenDriver.setStatus("ongoing");
                 RedisService.refreshDriverList(chosenDriver);
-                
+
                 var params = {
                     driver_id:chosenDriver.getID()
                 };

@@ -15,6 +15,7 @@
     "3000" : "General error - Driver",
     "3001" : "Invalid parameters - Driver",
     "53002" : "Driver is not exists",
+    "53007" : "Driver not assigned to any car yet",
     "53003" : "Invalid parameters - Unit Management",
     "53004" : "Car is not exists",
     "53005" : "Driver is still paired with another car",
