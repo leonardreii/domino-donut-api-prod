@@ -6,13 +6,41 @@ import { GoogleAPIService } from './../../services/googleapi.service';
 import { DataAccessService } from './../../services/data-access.service';
 import { CustomerModel } from './../../model/customer.model';
 import { DriverModel } from './../../model/driver.model';
+import { TokenModel } from './../../model/token.model';
 
 var request = require('request');
 var APIKEY = 'AIzaSyCaRXsdUpgSOffOmuLRiV73OruPL347Bc4';
+interface Socket{
+    employee_id:string;
+    socketid:string;
+}
 
 export class CustomerController{
     constructor(){
         Logging('Initalize Customer Controller');
+    }
+
+    async updateSocket(pRequest: any, pResponse: any){
+        try{
+            let vTokenObject: TokenModel = pResponse.locals.token;
+            let vParam:Socket=pRequest.body;
+            let vResult:any;
+            if (vParam.socketid == undefined || vParam.socketid == null || vParam.socketid == ""){
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 100, 'Invalid parameter');
+                return;
+            }
+            vParam.employee_id = vTokenObject.getId();
+            vResult = await DataAccessService.executeSP('update_socketid_employee', vParam);
+            pResponse.status(200).send("Successfully update");
+        }
+        catch(err){
+            if (err.code){
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, err.code, err.desc);
+            }
+            else{
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 3000, "General error - Driver");
+            }
+        }
     }
 
     async estimateTrip(pRequest:any, pResponse:any){
@@ -74,6 +102,9 @@ export class CustomerController{
                 pResponse.status(200).json({result:'No driver available at this moment'});
             }
             else{
+                chosenDriver.setStatus("ongoing");
+                RedisService.refreshDriverList(chosenDriver);
+                
                 var params = {
                     driver_id:chosenDriver.getID()
                 };
@@ -95,9 +126,6 @@ export class CustomerController{
                         plate_no: driverData[0].plate_no
                     };
                     let result = await DataAccessService.executeSP('order_assign_driver',driverParams);
-                    
-                    chosenDriver.setStatus("ongoing");
-                    RedisService.refreshDriverList(chosenDriver);
 
                     pResponse.status(200).json(response);
                 }
@@ -107,7 +135,12 @@ export class CustomerController{
             }
         }
         catch(err){
-            ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 2000, "Error in finding driver");
+            if (err.code){
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, err.code, err.desc);
+            }
+            else{
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 2000, "Error in finding driver");
+            }
         }
     }
 
@@ -121,7 +154,7 @@ export class CustomerController{
                 employee_id: pRequest.body.employee_id
             };
             let result:any = await DataAccessService.executeSP('employee_getdetails',params);
-            pResponse.status(200).json(result);
+            pResponse.status(200).json(result[0]);
         }
         catch(err){
             ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 2008, "Error in  retrieving details data");

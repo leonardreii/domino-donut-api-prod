@@ -27,7 +27,7 @@ export class GoogleAPIService{
                     units: punits,
                     hours: Math.floor(duration/3600),
                     minutes: Math.ceil((duration%3600)/60),
-                    price: Math.ceil(distance/1000)*3000
+                    price: punits=='matrix' ? Math.ceil(distance/1000)*3000 : Math.ceil((distance*0.3048)/1000)*3000
                 };
                 pResponse.status(200).json({result:tripEstimation});
             });

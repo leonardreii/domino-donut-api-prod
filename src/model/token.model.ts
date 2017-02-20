@@ -1,13 +1,13 @@
 export class TokenModel{
-    private userId: string;
+    private id: string;
 
     constructor(){
-        this.userId="";
+        this.id="";
     }
-    setUserId(userId:string){
-        this.userId = userId;
+    setId(id:string){
+        this.id = id;
     }
-    getUserId(){
-        return this.userId;
+    getId(){
+        return this.id;
     }
 }
