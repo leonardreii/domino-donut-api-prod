@@ -23,7 +23,7 @@ export function Routing(router:any){
 
     const customerController:CustomerController = new CustomerController();
     router.put('/customer/socketid',tokenService.verifyToken,customerController.updateSocket);
-    router.post('/customer/finddriver',customerController.findDriver);
+    router.post('/customer/finddriver',tokenService.verifyToken,customerController.findDriver);
     router.post('/customer/estimatetrip',customerController.estimateTrip);
     router.post('/customer/history',customerController.getHistory);
     router.post('/customer/getdetails',customerController.getDetails);
