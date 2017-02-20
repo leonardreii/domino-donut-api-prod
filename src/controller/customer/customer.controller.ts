@@ -74,6 +74,9 @@ export class CustomerController{
                 pResponse.status(200).json({result:'No driver available at this moment'});
             }
             else{
+                chosenDriver.setStatus("ongoing");
+                RedisService.refreshDriverList(chosenDriver);
+                
                 var params = {
                     driver_id:chosenDriver.getID()
                 };
@@ -95,9 +98,6 @@ export class CustomerController{
                         plate_no: driverData[0].plate_no
                     };
                     let result = await DataAccessService.executeSP('order_assign_driver',driverParams);
-                    
-                    chosenDriver.setStatus("ongoing");
-                    RedisService.refreshDriverList(chosenDriver);
 
                     pResponse.status(200).json(response);
                 }
@@ -107,7 +107,12 @@ export class CustomerController{
             }
         }
         catch(err){
-            ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 2000, "Error in finding driver");
+            if (err.code){
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, err.code, err.desc);
+            }
+            else{
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 2000, "Error in finding driver");
+            }
         }
     }
 
