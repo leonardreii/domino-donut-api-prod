@@ -19,6 +19,7 @@ export class DriverController{
 
     async updateSocket(pRequest: any, pResponse: any){
         try{
+            Logging('asdasda');
             let vTokenObject: TokenModel = pResponse.locals.token;
             let vParam:Socket=pRequest.body;
             let vResult:any;
@@ -136,6 +137,37 @@ export class DriverController{
             }
         }
     }
+
+    async getDriverSocketId(pRequest:any, pResponse:any){
+        try {
+            Logging("driverid : " + pRequest.params.driverid);
+            // if (pRequest.params.driverid == undefined || pRequest.params.driverid == null) {
+            //     ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 3001, 'Invalid parameters - Driver');
+            // return;
+            // }
+            // var vDriverId = pRequest.params.driverid;
+            var data = {
+                // pdriverid : vDriverId
+            };
+            let payload = await DataAccessService.executeSP('driver_getsocketid',data);
+            pResponse.status(200).send(payload[0]);
+        }
+        catch (err) {
+            Logging(err);
+            if (err.code){
+                ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, err.code, err.desc);
+            }
+            else{
+                if (err.code){
+                    ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, err.code, err.desc);
+                }
+                else{
+                    ErrorHandlingService.throwHTTPErrorResponse(pResponse, 500, 3000, "General error - Driver");
+                }
+            }
+        }
+    }
+
 
     async getData(pRequest:any, pResponse:any)
     {

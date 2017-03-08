@@ -21,6 +21,8 @@ export function Routing(router:any){
     router.post('/driver/add',driverController.addDriver);
     router.post('/driver/edit',driverController.editDriver);
     router.post('/driver/delete',driverController.deleteDriver);
+    router.get('/driver/getDriverSocketId',driverController.getDriverSocketId);
+
 
     const customerController:CustomerController = new CustomerController();
     router.put('/customer/socketid',tokenService.verifyToken,customerController.updateSocket);

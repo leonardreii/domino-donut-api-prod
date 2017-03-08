@@ -12,7 +12,7 @@ export class WebSocketService {
         this.http.listen(port);
         this.io.on('connection', function (socket:any) {
         WebSocketService.sockets[socket.id]=socket;
-        socket.emit('socketId', { socketId: socket.id });
+        console.log(socket.id);
         socket.on('send-order-detail', (ordersdetail:any) => {
             self.io.emit('placeId', {type:'ordersdetail', text: ordersdetail});
             console.log( ordersdetail);
@@ -22,10 +22,6 @@ export class WebSocketService {
             console.log('user disconnected');
         });
 
-        // socket.on('my other event', function (data:any) {
-        //         console.log(`socket id : ${socket.id} ,data :${data}`);
-        //         this.io.sockets.connected[socket.id].emit('news', `${data} gile lu ndro`);
-        // });
         });
     }
 }

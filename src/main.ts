@@ -2,7 +2,7 @@
 import { Routing } from './route';
 import { Logging } from './services/logging.service';
 import { SequelizeService } from './services/sequelize.service';
-import { RedisService } from './services/redis.service';
+// import { RedisService } from './services/redis.service';
 import { DataAccessService } from './services/data-access.service';
 import {EncryptionService} from './services/encryption.service';
 import {WebSocketService} from './services/websocket.service';
@@ -18,7 +18,7 @@ const router = express.Router();
 const port: number = config.port || 4000;
 let seq: SequelizeService = new SequelizeService();
 let enc: EncryptionService = new EncryptionService();
-let red: RedisService = new RedisService();
+// let red: RedisService = new RedisService();
 let ws: WebSocketService = new WebSocketService(app);
 let allow: string;
 let whiteList = (origin:string) => {

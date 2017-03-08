@@ -21,10 +21,10 @@
         "db" : {
             "dialect"  : "mssql",
             "host"     : "localhost",
-            "username" : "coba",
-            "password" : "acn",
-            "name"     : "Sera",
-            "port"     : 1433,
+            "username" : "admin",
+            "password" : "admin",
+            "name"     : "dev-scorpio",
+            "port"     : 56657,
             "timezone" : "+07:00",
             "pool"     : {
                 "min"  : 0,
