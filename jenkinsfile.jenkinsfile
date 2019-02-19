@@ -1,0 +1,31 @@
+node {
+   def mvnHome
+   stage('Detecting Changes') {
+       dir('C:/Jenkins/domino-donut-api'){
+           sh 'git pull origin master'
+           echo 'Successfully fetch data from SCM'
+       }
+   }
+   stage('Build') {
+       dir('C:/Jenkins/domino-donut-api'){
+           sh 'npm start'
+           echo 'Successfully build the project'
+       }
+   }
+   stage('Deploy To Dev Server') {
+       dir('C:/Jenkins/domino-donut-api'){
+           sh 'git add .'
+           sh 'git commit -m "Push latest code"'
+           sh 'git push heroku-dev master'
+           echo 'Successfully deployed to Dev Environment'
+       }
+   }
+   stage('Deploy To Prod Server'){
+       dir('C:/Jenkins/domino-donut-api'){
+           sh 'git add .'
+           sh 'git commit -m "Push latest code"'
+           sh 'git push heroku-prod master'
+           echo 'Successfully deployed to Prod Environment'
+       }
+   }
+}
