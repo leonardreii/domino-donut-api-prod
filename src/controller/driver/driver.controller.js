@@ -149,7 +149,9 @@ class DriverController {
                 // return;
                 // }
                 // var vDriverId = pRequest.params.driverid;
-                var data = {};
+                var data = {
+                // pdriverid : vDriverId
+                };
                 let payload = yield data_access_service_1.DataAccessService.executeSP('driver_getsocketid', data);
                 pResponse.status(200).send(payload[0]);
             }
