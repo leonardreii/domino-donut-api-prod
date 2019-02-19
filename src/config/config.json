@@ -1,5 +1,5 @@
 {
-    "LOCAL": {
+    "PROD": {
         "whitelist_domain": [
             "http://localhost:3000",
             "http://10.89.20.132:2006",

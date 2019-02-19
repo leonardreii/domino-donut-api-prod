@@ -3,3 +3,4 @@ node_modules
 *.js.map
 /typings
 src/debug.log
+src/config/mode.json
