@@ -5,7 +5,7 @@
   "main": "src/main.js",
   "scripts": {
     "compile": "tsc && node src/main.js",
-    "start": "nodemon -e ts,json  --exec \"npm run compile\"",
+    "start": "tsc",
     "build": "webpack --config config/webpack.prod.js --progress --profile --bail"
   },
   "dependencies": {
