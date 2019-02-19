@@ -1,0 +1,51 @@
+node {
+   def mvnHome
+   stage('Detecting Changes - DEV') {
+       dir('C:/Jenkins/domino-donut-api-dev'){
+           sh 'git pull origin master'
+           echo 'Successfully fetch data from SCM'
+       }
+   }
+   stage('Build - DEV') {
+       dir('C:/Jenkins/domino-donut-api-dev'){
+           sh 'npm start'
+           echo 'Successfully build the project'
+       }
+   }
+   stage('Commit Changes - DEV') {
+       dir('C:/Jenkins/domino-donut-api-dev'){
+           sh 'git add .'
+           sh 'git commit -m "Push latest code"'
+       }
+   }
+   stage('Deploy Changes - DEV'){
+       dir('C:/Jenkins/domino-donut-api-dev'){
+           sh 'git push heroku-dev master'
+           echo 'Successfully deployed to Dev Environment'
+       }
+   }
+   stage('Detecting Changes - PROD') {
+       dir('C:/Jenkins/domino-donut-api-prod'){
+           sh 'git pull origin master'
+           echo 'Successfully fetch data from SCM'
+       }
+   }
+   stage('Build - PROD') {
+       dir('C:/Jenkins/domino-donut-api-prod'){
+           sh 'npm start'
+           echo 'Successfully build the project'
+       }
+   }
+   stage('Commit Changes - PROD') {
+       dir('C:/Jenkins/domino-donut-api-prod'){
+           sh 'git add .'
+           sh 'git commit -m "Push latest code"'
+       }
+   }
+   stage('Deploy Changes - PROD'){
+       dir('C:/Jenkins/domino-donut-api-prod'){
+           sh 'git push heroku-prod master'
+           echo 'Successfully deployed to Prod Environment'
+       }
+   }
+}

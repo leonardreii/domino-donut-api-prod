@@ -4,8 +4,9 @@
   "description": "Sera",
   "main": "src/main.js",
   "scripts": {
-    "compile": "tsc && node src/main.js",
+    "compile": "tsc",
     "start": "tsc",
+    "starte": "nodemon -e ts,json  --exec \"npm run compile\"",
     "build": "webpack --config config/webpack.prod.js --progress --profile --bail"
   },
   "dependencies": {
