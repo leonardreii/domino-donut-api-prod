@@ -1,9 +1,9 @@
-# Digi-EWP API
+# Domino Donut API
 
 ## Installation
 
 1. Install NodeJS (https://nodejs.org/en/download/)
-2. Get latest built of Digi-EWP on Github
+2. Get latest built of Domino Donut from Innersource
 3. Open command prompt & change dir to this directory (`[DIR]/src/`)
 4. Run `npm install -g grunt-cli` to install grunt-cli
 5. Run `npm install -g typescript` to install typescript compiler globally
